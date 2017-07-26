@@ -30,7 +30,7 @@ class HeadImg extends Component {
                        style={StyleObject.headImg}
                 >
                 <View style={StyleObject.blurImg}></View>
-                <Icon name='ios-home' size={40}
+                <Icon name='ios-settings' size={40}
                     color = {'#fff'}
                     style={{position:'absolute',top:40,left:160}}
                 />
@@ -205,36 +205,92 @@ export default class Person extends Component {
                             iconSize = {25}
                         />
                 </View>
-                <View style={StyleObject.card}>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('UserMoney')}>
                             <Tab
                                 barType = 'tabBar'
                                 icon = 'ios-people'
                                 iconColor = '#FF0E4F'
                                 title = '我的资产'
                             />
-                </View>
+                </TouchableOpacity>
 
-                <FlatList
-                    data={flatData}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator = {false}
-                    renderItem={({item})=> this.RenderItem({itemData: item},true) }
-                    style={[StyleObject.cardDetail,StyleObject.splitLine,StyleObject.flex]}
-                    ListFooterComponent={
-                                             <View style={{marginRight:50}}>
-                                                <Tab
-                                                     barType = 'barDetail'
-                                                     icon = 'ios-people'
-                                                     iconColor = '#FF0E4F'
-                                                     title = '零钱'
-                                                     iconSize= {20}
-                                                     subTitle = '986700'
-                                                 />
-                                             </View>
-                                         }
-                />
+                <ScrollView style={[StyleObject.cardDetail,StyleObject.splitLine,StyleObject.flex,]}
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                >
+                        <TouchableOpacity onPress={()=>navigate('UserAccount')}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '账户余额'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigate('Integral')}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '积分'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigate('EleCoupons')}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '电子券'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigate('GiftBag')}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '礼包'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigate('Swfunds')}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '财富基金'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigate('ReCharge')}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '重复消费'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigate('SmallChange')} style={{marginRight:40}}>
+                            <Tab
+                                barType = 'barDetail'
+                                icon = 'ios-people'
+                                iconColor = '#FF0E4F'
+                                title = '零钱'
+                                iconSize= {20}
+                                subTitle = '986700'
+                            />
+                        </TouchableOpacity>
+                </ScrollView>
                 <TouchableOpacity
-                    onPress={()=>this.props.navigation.navigate('UserInfo')}
+                    onPress={()=>navigate('UserInfo')}
                 >
                     <View style={StyleObject.card}>
                         <Tab
@@ -245,102 +301,102 @@ export default class Person extends Component {
                         />
                     </View>
                 </TouchableOpacity>
-                <View style={StyleObject.card}>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('AccountSafe')}>
                             <Tab
                                 barType = 'tabBar'
                                 icon = 'ios-people'
                                 iconColor = '#FD4347'
                                 title = '账户安全'
                             />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('FundsManage')}>
                     <Tab
                         barType = 'tabBar'
                         icon = 'ios-people'
                         iconColor = '#FCC721'
                         title = '资金管理'
                     />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('ReceiveAddr',{type:'normal'})}>
                             <Tab
                                 barType = 'tabBar'
                                 icon = 'ios-people'
                                 iconColor = '#0CB85C'
                                 title = '收货地址'
                             />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('GratefulMan',{gratefulMan: ['noOne',]})}>
                     <Tab
                         barType = 'tabBar'
                         icon = 'ios-people'
                         iconColor = '#FE0100'
                         title = '感恩人'
                     />
-                </View>
-                <View style={[StyleObject.card,StyleObject.splitLine]}>
+                </TouchableOpacity>
+                <TouchableOpacity style={[StyleObject.card,StyleObject.splitLine]}>
                             <Tab
                                 barType = 'tabBar'
                                 icon = 'ios-people'
                                 iconColor = '#B02EE2'
                                 title = '我的下级'
                             />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('Order')}>
                     <Tab
                         barType = 'tabBar'
                         icon = 'ios-people'
                         iconColor = '#64AEED'
                         title = '我的订单'
                     />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card}>
                             <Tab
                                 barType = 'tabBar'
                                 icon = 'ios-people'
                                 iconColor = '#EF181B'
                                 title = '退款/退货及维修'
                             />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card}>
                     <Tab
                         barType = 'tabBar'
                         icon = 'ios-people'
                         iconColor = '#09D9A5'
                         title = '商品评价/晒单'
                     />
-                </View>
-                <View style={[StyleObject.card,StyleObject.splitLine]}>
+                </TouchableOpacity>
+                <TouchableOpacity style={[StyleObject.card,StyleObject.splitLine]}>
                             <Tab
                                 icon = 'ios-people'
                                 iconColor = '#F6C40C'
                                 title = '商品收藏'
                                 barType = 'tabBar'
                             />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card}>
                     <Tab
                         icon = 'ios-people'
                         iconColor = '#02AEF8'
                         title = '投诉'
                         barType = 'tabBar'
                     />
-                </View>
-                <View style={StyleObject.card}>
+                </TouchableOpacity>
+                <TouchableOpacity style={StyleObject.card}>
                             <Tab
                                 icon = 'ios-people'
                                 iconColor = '#009E57'
                                 title = '版本更新'
                                 barType = 'tabBar'
                             />
-                </View>
-                <View style={[StyleObject.card,StyleObject.bottomCard]}>
+                </TouchableOpacity>
+                <TouchableOpacity style={[StyleObject.card,StyleObject.bottomCard]}>
                     <Tab
                         icon = 'ios-people'
                         iconColor = '#C256F0'
                         title = '清除缓存'
                         barType = 'tabBar'
                     />
-                </View>
+                </TouchableOpacity>
             </ScrollView>
         )
     }

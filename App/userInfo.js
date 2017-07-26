@@ -31,11 +31,17 @@ export default class UserInfo extends Component {
            this.toggleSex = this.toggleSex.bind(this);
            this.openDatePicker = this.openDatePicker.bind(this);
       }
-      static navigationOptions ={
+      static navigationOptions = ({navigation})=> ({
           headerTitle: '用户信息',
-          headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,borderWidth:1},
+          headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:12},
           headerStyle:{height:50,paddingTop:20},
-      }
+          headerLeft: (
+                    <TouchableOpacity onPress={()=>navigation.goBack()}>
+                        <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+                    </TouchableOpacity>
+                     ),
+          headerRight:null,
+      })
       closeModal(){
           this.setState({
               modalVisible: false
@@ -49,7 +55,8 @@ export default class UserInfo extends Component {
       toggleSex(data){
           this.setState({
               sex: data,
-          })
+          });
+         this.closeModal();
       }
      async openDatePicker(){
           try {
@@ -60,10 +67,13 @@ export default class UserInfo extends Component {
                 if (action !== DatePickerAndroid.dismissedAction) {
                     // 这里开始可以处理用户选好的年月日三个参数：year, month (0-11), day
                     // this.setStata({birthDay: DatePickerAndroid.dateSetAction()});
-                    let date = new Date(year,month,year);
-                    console.log(date);
+                    var date = new Date(year,month,day);
+                    var year = date.getFullYear() ;
+                    var month = date.getMonth() +1 ;
+                    var day = date.getDate() ;
+                    var formatedStr = year + '/' + month +'/' + day ;
                     this.setState({
-                        birthDay: date.toLocaleDateString(),
+                        birthDay: formatedStr,
                     });
                 }
           } catch ({code, message}) {
@@ -73,27 +83,31 @@ export default class UserInfo extends Component {
       render(){
           const { navigate } = this.props.navigation;
         return (
-                <View style={{paddingLeft:15,paddingRight:15,backgroundColor:'#fff',flex:1,}}>
-                    <Tab
-                       barType='tabBar'
-                       iconLeftTitle='头像'
-                       rightTab = {true}
-                    />
-                    <Tab
-                       barType='tabBar'
-                       iconLeftTitle='用户名称'
-                       rightTab = {true}
-                       title='China Cannon'
-                    />
-                    <TouchableOpacity onPress={()=>{this.setModal(true);this.setState({modalType:'sexSel'})}}>
-                      <Tab
-                         barType='tabBar'
-                         iconLeftTitle='性别'
-                         rightTab = {true}
-                         title= {this.state.sex}
-                      />
+                <View style={{paddingTop:10,paddingLeft:15,paddingRight:15,backgroundColor:'#fff',flex:1,}}>
+                    <TouchableOpacity style={StyleObject.tabItemLine}>
+                        <Tab
+                            barType='tabBar'
+                            iconLeftTitle='头像'
+                            rightTab = {true}
+                        />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{this.openDatePicker()}}>
+                    <TouchableOpacity style={StyleObject.tabItemLine}>
+                        <Tab
+                            barType='tabBar'
+                            iconLeftTitle='用户名称'
+                            rightTab = {true}
+                            title='China Cannon'
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={StyleObject.tabItemLine} onPress={()=>{this.setModal(true);this.setState({modalType:'sexSel'})}}>
+                        <Tab
+                            barType='tabBar'
+                            iconLeftTitle='性别'
+                            rightTab = {true}
+                            title= {this.state.sex}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={StyleObject.tabItemLine} onPress={()=>{this.openDatePicker()}}>
                         <Tab
                            barType='tabBar'
                            iconLeftTitle='出生日期'
@@ -101,12 +115,12 @@ export default class UserInfo extends Component {
                            title={this.state.birthDay}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>navigate('RealName')}>
+                    <TouchableOpacity style={StyleObject.tabItemLine} onPress={()=>navigate('RealName')}>
                         <Tab
-                        barType='tabBar'
-                        iconLeftTitle='实名认证'
-                        rightTab = {true}
-                        title='立即认证'
+                            barType='tabBar'
+                            iconLeftTitle='实名认证'
+                            rightTab = {true}
+                            title='立即认证'
                         />
                     </TouchableOpacity>
                     <PickerModal 

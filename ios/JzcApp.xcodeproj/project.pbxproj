@@ -48,6 +48,7 @@
 		7A25ADB7C97245DA869F3460 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 574406120751409DBDEE5A82 /* Zocial.ttf */; };
 		238280246E984D2ABBB9C9C3 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53223D86B4FB45B09C5A81F8 /* libRNBlur.a */; };
 		09EE8F13682D4D3EAD55871B /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD942DFBC92D4D1796697601 /* libReactNativeIcons.a */; };
+		9AFEC8016AEF4E5C845E171A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FC2D1EA8B349C196AB7AD7 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,6 +284,8 @@
 		53223D86B4FB45B09C5A81F8 /* libRNBlur.a */ = {isa = PBXFileReference; name = "libRNBlur.a"; path = "libRNBlur.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		84B8976B675F40D8BBCB9CE1 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeIcons.xcodeproj"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		BD942DFBC92D4D1796697601 /* libReactNativeIcons.a */ = {isa = PBXFileReference; name = "libReactNativeIcons.a"; path = "libReactNativeIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		309D032D3E3E4D0196CE4531 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		71FC2D1EA8B349C196AB7AD7 /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +315,7 @@
 				9A81F51F3FF2454BA5B24283 /* libRNVectorIcons.a in Frameworks */,
 				238280246E984D2ABBB9C9C3 /* libRNBlur.a in Frameworks */,
 				09EE8F13682D4D3EAD55871B /* libReactNativeIcons.a in Frameworks */,
+				9AFEC8016AEF4E5C845E171A /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +485,7 @@
 				A29D27A889EF4D49B2B795ED /* RNVectorIcons.xcodeproj */,
 				ED5CF30D48394050B9DD1ED1 /* RNBlur.xcodeproj */,
 				84B8976B675F40D8BBCB9CE1 /* ReactNativeIcons.xcodeproj */,
+				309D032D3E3E4D0196CE4531 /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1040,12 +1045,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-icons\ios\ReactNativeIcons/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1069,12 +1076,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-icons\ios\ReactNativeIcons/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Release;
@@ -1099,6 +1108,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-icons\ios\ReactNativeIcons/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1122,6 +1132,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-icons\ios\ReactNativeIcons/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Release;
@@ -1154,12 +1165,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-icons\ios\ReactNativeIcons/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1192,12 +1205,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-icons\ios\ReactNativeIcons/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Release;
@@ -1225,6 +1240,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1249,6 +1265,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

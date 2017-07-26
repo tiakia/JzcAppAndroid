@@ -71,6 +71,10 @@ let StyleObject = {
             paddingRight:15,
             marginTop:-1,
       },
+      tabItemLine:{
+          borderBottomWidth:1/PixelRatio.get(),
+          borderColor: 'rgba(0,0,0,0.1)',
+      },
       splitLine: {
             marginBottom:8,
       },
@@ -156,7 +160,151 @@ let StyleObject = {
             backgroundColor:'#fff',
             padding:10
         },
- }
+        UserCommenTop:{
+            backgroundColor:'#fff', 
+            paddingLeft:15,
+            paddingRight:15,
+            paddingTop:8,
+            paddingBottom:8,
+            alignItems:'center',
+        },
+        UserCommenSplitLine:{
+            borderWidth:1/PixelRatio.get(),
+            borderColor:'#ddd',
+            height:40,
+        },
+        UserCommenSubLayout:{
+            paddingTop:10,
+            paddingBottom:10, 
+        },
+        UserCommenText:{
+            color:'#1d1d1d',
+            marginBottom:10
+        },
+        UserCommenTopLeft:{
+            alignItems:'flex-start',
+        },
+        UserCommenTopRight:{
+            alignItems:'flex-end',
+        },
+        UserCommenMarginBottom:{
+            marginBottom:8
+        },
+        UserCommenTopText:{
+            fontSize:20,
+            color:'#1d1d1d'
+        },
+        UserCommenTitle:{
+            paddingTop:8,
+            paddingBottom:8,
+            paddingLeft:10,
+            backgroundColor:'#F6F6F6',
+            borderTopWidth:1/PixelRatio.get(),
+            borderColor:'#ddd',
+            borderBottomWidth:1/PixelRatio.get(),
+        },
+        UserCommenItem:{
+            paddingLeft:10,
+            paddingRight:10,
+            backgroundColor:'#fff',
+            borderColor:'#ddd',
+            borderTopWidth:0,
+            borderBottomWidth:1/PixelRatio.get(),
+        },
+        UserCommenItemTop:{
+            marginBottom:10,
+            paddingTop:10,
+        },
+        UserCommenBottom:{
+            paddingLeft:15,
+            paddingRight:15,
+            backgroundColor:'#fff',
+            paddingBottom:8,
+            paddingTop:8,
+        },
+        UserCommenBottomCommen:{
+            paddingTop:10,
+            paddingBottom:10,
+            flex:1,
+            borderRadius:5,
+            alignItems:'center',
+        },
+        UserCommenBottomLeft:{
+            marginRight:5,
+            backgroundColor:'#D5D5D5',
+        },
+        UserCommenBottomRight:{
+            marginLeft:5,
+            backgroundColor:'#FD0744',
+        },
+        UserFundReContainer:{
+            flex:1,
+            paddingTop:15,
+            paddingLeft:15,
+            paddingRight:15,
+            justifyContent:'space-between'
+        },
+        UserFundReTop:{
+            borderRadius:5,
+            backgroundColor:'#fff',
+            paddingBottom:5,
+            paddingTop:5
+        },
+        UserFundReTopText:{
+            marginTop:10,
+            paddingLeft:15,
+            borderBottomWidth: 1/PixelRatio.get(),
+            borderColor:"#ddd"
+        },
+        UserFundReTopNum:{
+            flexDirection:'row',
+            alignItems:'center',
+            paddingTop:10,
+            paddingBottom:10
+        },
+        UserFundReTopNumText:{
+            fontSize:20,
+            color:'#919191'
+        },
+        UserFundReStatus:{
+            borderRadius:10,
+            paddingTop:1,
+            paddingBottom:1,
+            paddingLeft:5,
+            paddingRight:5
+        },
+        UserFundStatus:{
+            backgroundColor:'#2C90FE',
+        },
+        UserReStatus:{
+            backgroundColor:"#00DBB2",
+        },
+        UserFundReStatusText:{
+            fontSize:10,
+            color:'#fff',
+        },
+        UserFundReBottom:{
+            paddingLeft:25,
+            paddingRight:25,
+        },
+        UserFundReMarginRight:{
+            marginRight:30,
+        },
+        receiveAddrModal:{
+            backgroundColor:"rgba(0,0,0,.5)"
+        },
+        receiveAddrModalContainer:{
+            backgroundColor:"#fff",
+            width:300,
+            height:100,
+            borderRadius:10
+        },
+        receiveAddrButton:{
+            height:40,
+            borderTopWidth:1/PixelRatio.get(),
+            borderColor:'#ddd'
+        },
+}
 
 const styles = StyleSheet.create(StyleObject);
 

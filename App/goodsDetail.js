@@ -462,7 +462,7 @@ class DeatilImages extends Component {
                                 <Image
                                     style={{
                                                 width:Dimensions.get('window').width,
-                                                height: (this.state.height * Dimensions.get('window').width)/this.state.width / PixelRatio.get(),
+                                                height: (this.state.height * Dimensions.get('window').width)/this.state.width ,
                                                 marginBottom:10
                                             }}
                                     source={{uri:url}}
@@ -540,6 +540,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
         width: 80,
+        alignItems:'center',
     },
 });
 

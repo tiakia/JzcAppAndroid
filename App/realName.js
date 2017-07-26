@@ -10,12 +10,15 @@ import {
 	PixelRatio,
 	Modal,
 	TouchableOpacity,
+	ScrollView,
 } from 'react-native';
 import StyleObject from './styleSheet.js';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalContent from './Modal';
 import Area from './area.json';
+import ImagePicker from 'react-native-image-picker';
+
 
 export default class RealName extends Component {
 	constructor(props){
@@ -28,10 +31,12 @@ export default class RealName extends Component {
             area:[],
             selectProvince:Area[0].name,
             selectCity:Area[0].city[0].name,
-            selectArea:Area[0].city[0].area[0],
+			selectArea:Area[0].city[0].area[0],
+			avatarFront:null,
+			avatarReverce:null,
 		}
 		this.handleSelect = this.handleSelect.bind(this);
-		//this.cameraAction = this.cameraAction.bind(this);
+		this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
 	}
 	handleSelect(prov,city,area){
         this.setState({
@@ -41,39 +46,64 @@ export default class RealName extends Component {
 			modalVisible:false,	
 		});
 	}
-//	cameraAction=()=>{
-//		ImagePicker.showImagePicker(options, (response) => {
-//		console.log('Response = ', response);
-//
-//		if (response.didCancel) {
-//			console.log('User cancelled image picker');
-//		}
-//		else if (response.error) {
-//			console.log('ImagePicker Error: ', response.error);
-//		}
-//		else if (response.customButton) {
-//			console.log('User tapped custom button: ', response.customButton);
-//		}
-//		else {
-//			let source = { uri: response.uri };
-//
-//			// You can also display the image using data:
-//			// let source = { uri: 'data:image/jpeg;base64,' + response.data };
-//
-//			this.setState({
-//			avatarSource: source
-//			});
-//		}
-//		});
-//	}
-	static navigationOptions = {
+	static navigationOptions = ({navigation})=>({
 		headerTitle: '实名认证',
-		headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
+		headerLeft: (
+                    <TouchableOpacity onPress={()=>navigation.goBack()}>
+                        <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+                    </TouchableOpacity>
+        ),
+		headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:12},
 		headerStyle:{height:50,paddingTop:20},
+	});
+	selectPhotoTapped(dir) {
+		const options = {
+			title:'请选择图片来源',
+			cancelButtonTitle:'取消',
+			takePhotoButtonTitle:'拍照',
+  			chooseFromLibraryButtonTitle:'相册图片',
+			quality: 1.0,
+			maxWidth: 500,
+			maxHeight: 500,
+			storageOptions: {
+				skipBackup: true
+			}
+		};
+		ImagePicker.showImagePicker(options, (response) => {
+			console.log('Response = ', response);
+
+			if (response.didCancel) {
+				console.log('用户取消了选择图片');
+			}
+			else if (response.error) {
+				console.log('ImagePicker Error: ', response.error);
+			}
+			else if (response.customButton) {
+				console.log('User tapped custom button: ', response.customButton);
+			}
+			else {
+				let source = { uri: response.uri };
+				// You can also display the image using data:
+				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
+				console.log(source);
+				if(dir == 'front'){
+					this.setState({
+						avatarFront: source
+					});
+				}else if(dir == 'revese'){
+					this.setState({
+						avatarReverce: source
+					});
+				}
+			}
+		});
 	}
 	render(){
+		const { navigate } = this.props.navigation;
 		return(
-		   <View style={styles.realNameContainer}>
+		   <ScrollView style={styles.realNameContainer}
+			       showsVerticalScrollIndicator={false}	   	  
+		   >
 			  <View style={styles.realNameItem}>
 				 <View style={styles.itemLeft}>
 				 	<Text style={{color:"#1d1d1d"}}>真实姓名</Text> 
@@ -106,13 +136,23 @@ export default class RealName extends Component {
 				 	<Text style={{color:"#1d1d1d"}}>证件照片</Text> 
 				 </View>	
 				 <View style={StyleObject.flex}>
-					  <TouchableOpacity style={styles.selectImg} >
-						  <Icon name='ios-add' size={60}/>
-					 	  <Text>请上传身份证正面照片</Text> 
+					  <TouchableOpacity style={styles.selectImg} onPress={()=>{this.selectPhotoTapped('front')}}>
+							{ this.state.avatarFront === null ? 
+								<View style={StyleObject.center}>
+									 <Icon name='ios-add' size={60}/>
+						   			 <Text>请上传身份证正面照片</Text> 	
+								</View> :
+								<Image style={styles.avatar} source={this.state.avatarFront} />
+							}
 					  </TouchableOpacity>
-					  <TouchableOpacity style={styles.selectImg}>
-						  <Icon name='ios-add' size={60}/>
-					 	  <Text>请上传身份证反面照片</Text> 
+					  <TouchableOpacity style={styles.selectImg} onPress={()=>{this.selectPhotoTapped('reverse')}}>
+						  { this.state.avatarReverce === null ? 
+								<View style={StyleObject.center}>
+									 <Icon name='ios-add' size={60}/>
+						   			 <Text>请上传身份证反面照片</Text> 	
+								</View> :
+								<Image style={styles.avatar} source={this.state.avatarReverce} />
+							}
 					  </TouchableOpacity>
 				 </View>	
 			  </View>
@@ -129,7 +169,7 @@ export default class RealName extends Component {
 					<Icon name='ios-arrow-forward' size={25}/>
 				 </View>	
 			  </TouchableOpacity>
-			  <View style={styles.realNameItem}>
+			  <View style={[styles.realNameItem,{marginBottom:20}]}>
 				 <View style={styles.itemLeft}>
 				 	<Text style={{color:"#1d1d1d"}}>详细地址</Text> 
 				 </View>	
@@ -154,7 +194,7 @@ export default class RealName extends Component {
 							selectCity={this.state.selectCity}
 							selectArea={this.state.selectArea}
 			/>
-		   </View>
+		   </ScrollView>
 		)
 	}
 }
@@ -190,6 +230,7 @@ const styles=StyleSheet.create({
 		marginBottom:15,
 	},
 	realNameAreaResult:{
-		marginRight:5
+		marginRight:5,
+		color:'#1d1d1d',
 	},
 });

@@ -3086,6 +3086,10 @@ react-native-icons@^0.7.1:
   version "0.7.1"
   resolved "http://registry.npm.taobao.org/react-native-icons/download/react-native-icons-0.7.1.tgz#a05c6c87bff7bfd883903bb9b7156f5ba568f977"
 
+react-native-image-picker@^0.26.3:
+  version "0.26.3"
+  resolved "http://registry.npm.taobao.org/react-native-image-picker/download/react-native-image-picker-0.26.3.tgz#0ad2eede49501a7046d8046a73813696539c3dcd"
+
 react-native-swiper@^1.5.4:
   version "1.5.4"
   resolved "http://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.5.4.tgz#a85535b5374ef8d605a7a720e447ac46816ac448"

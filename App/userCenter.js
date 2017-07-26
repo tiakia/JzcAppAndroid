@@ -34,7 +34,22 @@ import GoodsDetailNav from './goodsDetail';
 import Index from './index';
 import RealName from './realName';
 import PickPoints  from './pickerPoints';
-
+import CameraPicker from './comeraImage';
+import UserMoney from './userMoney';
+import UserAccount from './userAccount';
+import Integral from './integral';
+import EleCoupons from './eleCoupons';
+import GiftBag from './giftBag';
+import SmallChange from './smallChange';
+import Swfunds from './swfunds';
+import ReCharge from './reCharge';
+import AccountSafe from './accountSafe';
+import FundsManage from './fundsManage';
+import GratefulMan from './gratefulMan';
+import ReceiveAddr from './receiveAddr';
+import EditAddr from './editAddr';
+import AddNewAddr from './addNewAddr';
+import Order from './order';
 
 const goodsData = [
     {
@@ -290,10 +305,10 @@ const UserCenterNavigator = TabNavigator({
 
 const UserCenter = StackNavigator({
     Home: {
-            screen: UserCenterNavigator,
-          },
+        screen: UserCenterNavigator,
+    },
     UserInfo: {
-            screen: UserInfo,
+        screen: UserInfo,
     },
     Cart: {
         screen: CartPage,
@@ -301,9 +316,57 @@ const UserCenter = StackNavigator({
     RealName: {
         screen: RealName,
     },
-     PickPoints :{
-         screen:  PickPoints ,
-     },
+    PickPoints :{
+        screen:  PickPoints ,
+    },
+    CameraPicker :{
+        screen: CameraPicker,
+    },
+    UserMoney:{
+        screen: UserMoney,
+    },
+    UserAccount:{
+        screen: UserAccount,
+    },
+    Integral:{
+        screen: Integral,
+    },
+    EleCoupons:{
+        screen: EleCoupons,
+    },
+    GiftBag:{
+        screen: GiftBag,
+    },
+    SmallChange:{
+        screen: SmallChange,
+    },
+    Swfunds:{
+        screen: Swfunds,
+    },
+    ReCharge:{
+        screen: ReCharge,
+    },
+    AccountSafe:{
+        screen: AccountSafe,
+    },
+    FundsManage:{
+        screen: FundsManage,
+    },
+    GratefulMan:{
+        screen: GratefulMan,
+    },
+    ReceiveAddr:{
+        screen: ReceiveAddr,
+    },
+    EditAddr:{
+        screen: EditAddr,
+    },
+    AddNewAddr:{
+        screen: AddNewAddr,
+    },
+    Order:{
+        screen: Order
+    },
     Search: { screen: Search },
     GoodsDetail: { screen: GoodsDetailNav },
 });

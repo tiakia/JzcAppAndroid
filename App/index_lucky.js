@@ -106,6 +106,7 @@ const styles=StyleSheet.create({
         borderRadius:5,
         marginTop:2,
         width:"100%",
-        padding:2
+        padding:2,
+        width:'80%',
     },
 });
