@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import StyleObject from './styleSheet.js';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {StackNavigator,TabNavigator } from 'react-navigation';
 /*
     orderStatus refund 退款
     status: 
@@ -37,175 +38,276 @@ const orderData = [
   {//一个订单
         orderId: 1, //订单ID
         status: '2.1.1', //订单状态
-        shop:[  //一个对象是一个商铺
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopId: 123,
-                shopName:'Armani阿玛尼', //商铺名字
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                    },
-                ],
-            }
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
         ],
     },
     {//一个订单
         orderId: 2, //订单ID
         status: '2.1.2', //订单状态
-        shop:[  //一个对象是一个商铺
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopId: 123,
-                shopName:'Armani阿玛尼', //商铺名字
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                    },
-                ],
-            }
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
         ],
     },
     {//一个订单
         orderId: 3, //订单ID
         status: '1.1', //订单状态
-        shop:[  //一个对象是一个商铺
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopId: 123,
-                shopName:'Armani阿玛尼', //商铺名字
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                    },
-                ],
-            }
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
         ],
     },
     {//一个订单
         orderId: 4, //订单ID
         status: '2.2.1', //订单状态
-        shop:[  //一个对象是一个商铺
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopId: 123,
-                shopName:'Armani阿玛尼', //商铺名字
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                    },
-                ],
-            }
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
         ],
     },
     {//一个订单
         orderId: 5, //订单ID
         status: '1.2', //订单状态
-        shop:[  //一个对象是一个商铺
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopId: 123,
-                shopName:'Armani阿玛尼', //商铺名字
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                    },
-                ],
-            }
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
         ],
     },
     {//一个订单
         orderId: 6, //订单ID
         status: '4.1', //订单状态
-        shop:[  //一个对象是一个商铺
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopId: 123,
-                shopName:'Armani阿玛尼', //商铺名字
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:2,
-                    },
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                        goodsStatus: '退款中'
-                    },
-                ],
-            }
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:2,
+            },
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+                goodsStatus: '退款中'
+            },
         ],
+            
     },
     {//一个订单
         orderId: 7, //订单ID
         status: "4.4", //订单状态
-        shop:[  //一个对象是一个商铺
+        shopName:'f4d5s64f65s', //商铺名字
+        shopId: 123,
+        goods:[ //一个对象是一家店铺内的一个商品
             {
-                shopName:'f4d5s64f65s', //商铺名字
-                shopId: 123,
-                goods:[ //一个对象是一家店铺内的一个商品
-                    {
-                        goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
-                        goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
-                        goodsType:[ //商品类型
-                                    {type:'颜色分类',detail:'深藏青'}
-                                ],
-                        goodsPrice: 1899,
-                        goodsPriceDiscount:999,
-                        goodsNum:1,
-                    },
-                ],
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
             },
         ],
     }
 ];
-
-export default class Order extends Component {
+//全部
+class AllOrder extends Component {
     constructor(props){
         super(props);
         this.state={
-            orderData:orderData,
+            orderData:orderData
+        }
+    }
+    static navigationOptions = {
+        tabBarLabel: '全部'
+    }
+    render(){
+        return(
+            <OrderList orderData={this.state.orderData}/>
+        )
+    }
+}
+//待评价
+class WaitEval extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            orderData: orderData.filter((item)=>{return item.status == "1.1"})
+        }
+    }
+    static navigationOptions = {
+        tabBarLabel: "待评价"
+    }
+    render(){
+        return(
+            <OrderList orderData={this.state.orderData}/>
+        )
+    }
+}
+//待收货
+class WaitReceiveGoods extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            orderData: orderData.filter((item)=>{return item.status == '2.1.2'})
+        }
+    }
+    static navigationOptions = {
+        tabBarLabel: '待收货'
+    }
+    render(){
+        return(
+            <OrderList orderData={this.state.orderData}/>
+        )
+    }
+}
+//待发货
+class WaitSendGoods extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            orderData: orderData.filter((item)=>{return item.status == '2.1.1'})
+        }
+    }
+    static navigationOptions ={
+        tabBarLabel: '待发货',
+    }
+    render(){
+        return(
+            <OrderList orderData={this.state.orderData}/>
+        )
+    }
+}
+//退款/售后
+class RefundAfterSale extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            orderData: orderData.filter((item)=>{return item.status == ("4.1" || "4.2" || "4.3" || "4.4")})
+        }
+    }
+    static navigationOptions ={
+        tabBarLabel:'退款/售后',
+        /* tabBarLabel:({ tintColor }) => (
+            <View style={[{backgroundColor:tintColor,},StyleObject.flex,StyleObject.center]}>
+                <Text style={{color:'#fff'}}>退款/售后</Text>
+            </View>
+        ), */
+    }
+    render(){
+        return(
+            <OrderList orderData={this.state.orderData}/>
+        )
+    }
+}
+
+const Order = TabNavigator({
+    AllOrder: {
+        screen: AllOrder,
+    },
+    WaitSendGoods: {
+        screen: WaitSendGoods,
+    },
+    WaitReceiveGoods: {
+        screen: WaitReceiveGoods,
+    },
+    WaitEval: {
+        screen: WaitEval,
+    },
+    RefundAfterSale: {
+        screen: RefundAfterSale,
+    }
+},{
+    tabBarPosition:'top',
+    initialRouteName: 'AllOrder',
+    activeBackgroundColor:'#fc0941',
+    inactiveBackgroundColor:'#39393b',
+    scrollEnabled:false,
+    lazy:false,
+    tabBarOptions:{
+        labelStyle:{
+            fontSize:12,
+            color:'#fff',
+        },
+        tabStyle:{
+            padding:0,
+        },
+        style: {
+            backgroundColor:'#39393b'
+        }
+    }
+});
+
+class OrderList extends Component {
+    constructor(props){
+        super(props);
+        const { orderData } = props;
+        this.state={
+            orderData:props.orderData,
         }
         this.renderOrderList = this.renderOrderList.bind(this);
         this.renderShopList = this.renderShopList.bind(this);
@@ -224,97 +326,97 @@ export default class Order extends Component {
                     ), 
         }
     }
-    OrderButton(){
+    OrderButton(orderId){
         return [
             {   //待付款
-                status: "2.2.1",
+                status: ["2.2.1"],
                 button:[
                     {
-                         title :'付款',
-                         handlePress: [()=>alert(123)],
-                         acitve : true,
-                    },
-                    {
                         title: '取消订单',
-                        handlePress: [()=>alert(123)],
+                        handlePress: ()=>alert(orderId),
                         active : false,
                     },
                     {
                         title: '联系卖家',
-                        handlePress: [()=>alert(123)],
+                        handlePress: ()=>alert(orderId),
                         active : false,
-                    }
+                    },
+                     {
+                         title :'付款',
+                         handlePress: ()=>{alert(orderId)},
+                         active : true,
+                    },
                 ],
             },
             {   //待发货
-                status: "2.2.1",
+                status: ["2.1.1"],
                 button:[
                     {
-                        title:'退款',
-                        handlePress:[()=>alert(123)],
-                        acitve: true,
+                        title:'提醒发货',
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
                     {
-                        title:'提醒发货',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        title:'退款',
+                        handlePress:()=>alert(orderId3),
+                        active: true,
                     },
                 ]
             },
             {   //待收货
-                status: '2.1.2' ,
+                status: ['2.1.2'] ,
                 button:[
                     {
-                        title:'确认收货',
-                        handlePress:[()=>alert(123)],
-                        acitve: true,
-                    },
-                    {
                         title:'申请售后',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
                     {
                         title:'查看物流',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
                     {
                         title:'延长收货',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
+                    {
+                        title:'确认收货',
+                        handlePress:()=>alert(orderId),
+                        active: true,
+                    }
                 ]
             },
             {
                 //待评价 
-                status: '3.1' ,
+                status: ['1.1','4.1'] ,
                 button:[
                     {
                         title:'删除订单',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
                     {
                         title:'评价',
-                        handlePress:[()=>alert(123)],
-                        acitve: true,
+                        handlePress:()=>alert(orderId),
+                        active: true,
                     },
                 ]
             },
             {
                 //待追评 
-                status: '1.3' ,
+                status: ['1.3'] ,
                 button:[
                     {
                         title:'删除订单',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
                     {
                         title:'追加评价',
-                        handlePress:[()=>alert(123)],
-                        acitve: true,
+                        handlePress:()=>alert(orderId),
+                        active: true,
                     },
                 ]
             },
@@ -324,8 +426,8 @@ export default class Order extends Component {
                 button:[
                     {
                         title:'删除订单',
-                        handlePress:[()=>alert(123)],
-                        acitve: false,
+                        handlePress:()=>alert(orderId),
+                        active: false,
                     },
                 ]
             },
@@ -356,17 +458,29 @@ export default class Order extends Component {
             </View>
         )
     }
-    renderOrderButton(status){
+    renderOrderButton(status,orderId){
         return (
              <View style={[styles.orderFlexDir,styles.orderPadding,{justifyContent:'flex-end'}]}>
-                <OrderButton title='已收藏' type='collect'/>
-                <OrderButton title='联系卖家'/>
-                <OrderButton title='取消订单'/>
-                <OrderButton title='付款' type='active'/>
+                {
+                  this.OrderButton(orderId).map((val,idx)=>{
+                         if(val.status.indexOf(status) != -1){
+                            let buttons = val.button;
+                            return buttons.map((item,index)=>{
+                                return(
+                                    <OrderButton title={item.title} 
+                                                 isActive={item.active}
+                                                 handlePress={item.handlePress}
+                                                 key={index}
+                                    />
+                                )
+                            })
+                        } 
+                    })
+                }
             </View>
         )
     }
-    renderOrderList(val,idx,shopName,status,shopNum){
+    renderOrderList(val,idx,shopName,status){
             return( 
                 <View style={[styles.orderFlexDir,styles.orderDetail]} key={idx}>
                     <View>
@@ -404,172 +518,32 @@ export default class Order extends Component {
             <ScrollView style={StyleObject.flex}>
                 {
                     this.state.orderData.map((val,idx)=>{
-                        const shop = val.shop;
+                        const shopName = val.shopName;
                         var status = val.status;
-                        var shopNum = shop.length;
+                        var goods = val.goods;
+                        var orderId = val.orderId;
                         return (
-                            <View style={styles.orderItem} >
+                            <View style={styles.orderItem} key={idx}>
+                                <View style={styles.orderDetailAll} >
                                     {
-                                        shop.map((val,idx)=>{
-                                            var goods = val.goods;
-                                            var shopName = val.shopName;
-                                            var num = goods.length;
-                                            return(
-                                                    <View style={styles.orderDetailAll} key={idx}>
-                                                        {
-                                                            this.renderShopList(val,idx,status)
-                                                        }
-                                                        {   
-                                                            goods.map((val,idx)=>
-                                                                this.renderOrderList(val,idx,shopName,status,num))
-                                                        }
-                                                        <View style={styles.orderAmount}>
-                                                            <Text style={StyleObject.fontSize}>共{val.shopNum}件商品   合计：999（含运费 ¥ 20）</Text>
-                                                        </View>
-                                                    </View>
-                                            )
-                                        })      
+                                        this.renderShopList(val,idx,status)
                                     }
+                                    {   
+                                        goods.map((val,idx)=>
+                                            this.renderOrderList(val,idx,shopName,status))
+                                    }
+                                    <View style={styles.orderAmount}>
+                                        <Text style={StyleObject.fontSize}>共{val.shopNum}件商品   合计：999（含运费 ¥ 20）</Text>
+                                    </View>
+                                </View>
                                 {
-                                    this.renderOrderButton(status)
+                                    this.renderOrderButton(status,orderId)
                                 }
                             </View>
-                    )
-                })
+                        )
+                    })
                 } 
             </ScrollView>
-        )
-    }
-}
-
-class OrderList extends Component {
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-            <View style={styles.orderItem} >
-
-                <View style={[styles.orderFlexDir,styles.orderJustify,styles.orderPadding]}>
-                   <View style={styles.orderFlexDir}>
-                       <Text style={{marginRight:10}}> Armani阿玛尼 </Text>
-                       <Icon name='ios-arrow-forward' size={20} />
-                   </View>
-                   <View>
-                        <Text style={StyleObject.activeTextColor}>等待买家付款</Text>
-                   </View>
-                </View>
-
-                <View style={styles.orderDetailAll}>
-                        <View style={[styles.orderFlexDir,styles.orderDetail]}>
-                           <View>
-                                <Image source={require('./../images/head.jpg')}
-                                       style={{height:100,width:100,marginRight:5,}}
-                                />
-                           </View>
-                           <View>
-                                <Text style={styles.orderDetailText}
-                                      numberOfLines= {2}
-                                >
-                                    2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色
-                                </Text>
-                                <Text style={styles.orderTextColor}>颜色分类：深藏青</Text>
-                           </View>
-                           <View style={styles.orderPrice}>
-                               <View style={{alignItems:'flex-end',marginBottom:8}}>
-                                    <Text>¥ 999 </Text>
-                                    <Text style={[styles.orderTextColor,{textDecorationLine:'line-through'}]}>¥ 1899 </Text>
-                               </View>
-                               <Text style={styles.orderTextColor}> ×1 </Text>
-                               {
-                                    this.props.orderStatus == 'refund' ?
-                                    <Text style={StyleObject.activeTextColor}>退款成功</Text> :
-                                    null
-                               }
-                           </View>
-                           
-                       </View>
-                       <View style={[styles.orderFlexDir,styles.orderDetail]}>
-                           <View>
-                                <Image source={require('./../images/head.jpg')}
-                                       style={{height:100,width:100,marginRight:5,}}
-                                />
-                           </View>
-                           <View>
-                                <Text style={styles.orderDetailText}
-                                      numberOfLines= {2}
-                                >
-                                    2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色
-                                </Text>
-                                <Text style={styles.orderTextColor}>颜色分类：深藏青</Text>
-                           </View>
-                           <View style={styles.orderPrice}>
-                               <View style={{alignItems:'flex-end',marginBottom:8}}>
-                                    <Text>¥ 999 </Text>
-                                    <Text style={[styles.orderTextColor,{textDecorationLine:'line-through'}]}>¥ 1899 </Text>
-                               </View>
-                               <Text style={styles.orderTextColor}> ×1 </Text>
-                               {
-                                    this.props.orderStatus == 'refund' ?
-                                    <Text style={StyleObject.activeTextColor}>退款成功</Text> :
-                                    null
-                               }
-                           </View>
-                           
-                       </View>
-                       <View style={styles.orderAmount}>
-                           <Text>共1件商品   合计：999（含运费 ¥ 20）</Text>
-                       </View>
-                </View>
-                <View style={[styles.orderFlexDir,styles.orderJustify,styles.orderPadding]}>
-                   <View style={styles.orderFlexDir}>
-                       <Text style={{marginRight:10}}> 沙琪玛 </Text>
-                       <Icon name='ios-arrow-forward' size={20} />
-                   </View>
-                   <View>
-                        <Text style={StyleObject.activeTextColor}>等待买家付款</Text>
-                   </View>
-                </View>
-
-                <View style={styles.orderDetailAll}>
-                       <View style={[styles.orderFlexDir,styles.orderDetail]}>
-                           <View>
-                                <Image source={require('./../images/head.jpg')}
-                                       style={{height:100,width:100,marginRight:5,}}
-                                />
-                           </View>
-                           <View>
-                                <Text style={styles.orderDetailText}
-                                      numberOfLines= {2}
-                                >
-                                    2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色
-                                </Text>
-                                <Text style={styles.orderTextColor}>颜色分类：深藏青</Text>
-                           </View>
-                           <View style={styles.orderPrice}>
-                               <View style={{alignItems:'flex-end',marginBottom:8}}>
-                                    <Text>¥ 999 </Text>
-                                    <Text style={[styles.orderTextColor,{textDecorationLine:'line-through'}]}>¥ 1899 </Text>
-                               </View>
-                               <Text style={styles.orderTextColor}> ×1 </Text>
-                               {
-                                    this.props.orderStatus == 'refund' ?
-                                    <Text style={StyleObject.activeTextColor}>退款成功</Text> :
-                                    null
-                               }
-                           </View>
-                       </View>
-                       <View style={styles.orderAmount}>
-                           <Text>共1件商品   合计：999（含运费 ¥ 20）</Text>
-                       </View>
-                </View>
-                <View style={[styles.orderFlexDir,styles.orderPadding,{justifyContent:'flex-end'}]}>
-                    <OrderButton title='已收藏' type='collect'/>
-                    <OrderButton title='联系卖家'/>
-                    <OrderButton title='取消订单'/>
-                    <OrderButton title='付款' type='active'/>
-                </View>
-            </View>
         )
     }
 }
@@ -580,13 +554,9 @@ class OrderButton extends Component {
     }
     render(){
         const type = this.props.type;
-        if(type == 'active'){
-            return(
-                        <TouchableOpacity style={[styles.orderButton,{borderColor:'#F80C49'}]}>
-                            <Text style={[StyleObject.activeTextColor,StyleObject.fontSize]}>{this.props.title}</Text>
-                        </TouchableOpacity>
-                    )
-        }else if(type == 'collect'){
+        const isActive = this.props.isActive;
+        console.log(isActive+'');
+        if(type == 'collect'){
             return(
                 <TouchableOpacity style={[styles.orderButton,{borderColor:'#F80C49'}]}>
                     <View style={[StyleObject.flexDirection]}>
@@ -597,11 +567,37 @@ class OrderButton extends Component {
             )
         }else{
             return(
-                        <TouchableOpacity style={styles.orderButton}>
-                            <Text style={[{color:'#656565'},StyleObject.fontSize]}>{this.props.title}</Text>
+                        <TouchableOpacity style={isActive ? [styles.orderButton,{borderColor:'#F80C49'}] : [styles.orderButton]}
+                                          onPress={this.props.handlePress}
+                        >
+                            <Text style={isActive ? [{color:'#F80C49'},StyleObject.fontSize] :[{color:'#656565'},StyleObject.fontSize]}>{this.props.title}</Text>
                         </TouchableOpacity>
                     )
         }
+    }
+}
+
+export default class OrderScreen extends Component {
+    constructor(props){
+        super(props);
+    }
+    static navigationOptions = ({navigation})=>{
+        const {state,setParams,goBack} = navigation;
+        return {
+            headerTitle:'我的订单', 
+            headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,color:'#F4013C'},
+            headerStyle:{height:50,paddingTop:20,},
+            headerLeft: (
+                        <TouchableOpacity onPress={()=>goBack()}>
+                            <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+                        </TouchableOpacity>
+                    ), 
+        }
+    }
+    render(){
+        return(
+            <Order/>
+        )
     }
 }
 
@@ -609,9 +605,7 @@ const styles=StyleSheet.create({
     orderItem:{
         marginBottom:5,
         backgroundColor:"#fff",
-        paddingTop:10,
-        paddingBottom:5,
-        paddingLeft:5,
+        paddingTop:5,
     },
     orderFlexDir:{
         flexDirection:'row'
@@ -628,9 +622,8 @@ const styles=StyleSheet.create({
     },
     orderDetailAll:{
          borderBottomWidth:1,
-         borderColor:'#ddd',
+         borderColor:'#f5f5f5',
          marginTop:5,
-         marginBottom:5,
     },
     orderDetail: {
         backgroundColor:'#F6F6F6',
@@ -656,14 +649,15 @@ const styles=StyleSheet.create({
         marginTop:5,
     },
     orderButton:{
-        paddingTop:2,
         paddingLeft:8,
+        paddingTop:2,
+        paddingBottom:2,
         paddingRight:8,
         borderWidth:1,
         borderColor:"#9c9c9c",
         marginRight:10,
-        marginBottom:5,
         marginTop:5,
-        borderRadius:15
+        marginBottom:5,
+        borderRadius:15,
     }
 });

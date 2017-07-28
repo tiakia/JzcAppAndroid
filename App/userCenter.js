@@ -49,7 +49,7 @@ import GratefulMan from './gratefulMan';
 import ReceiveAddr from './receiveAddr';
 import EditAddr from './editAddr';
 import AddNewAddr from './addNewAddr';
-import Order from './order';
+import OrderScreen from './order';
 
 const goodsData = [
     {
@@ -280,7 +280,7 @@ const UserCenterNavigator = TabNavigator({
         showIcon:true,
         scrollEnabled:false,
         lazy:false,
-        pressOpacity:4.0,
+        pressOpacity:0.5,
         tabStyle:{
             flex:1,
             justifyContent:'space-between',
@@ -365,7 +365,7 @@ const UserCenter = StackNavigator({
         screen: AddNewAddr,
     },
     Order:{
-        screen: Order
+        screen: OrderScreen,
     },
     Search: { screen: Search },
     GoodsDetail: { screen: GoodsDetailNav },
