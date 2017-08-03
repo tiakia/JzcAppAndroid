@@ -172,7 +172,7 @@ export default class ReceiveAddr extends Component {
                 </ScrollView>
                 {
                     state.params.type == 'manage' ?
-                    <TouchableOpacity style={styles.addNewAddr} onPress={()=>navigate('AddNewAddr')}>
+                    <TouchableOpacity style={StyleObject.pageBottomBtn} onPress={()=>navigate('AddNewAddr')}>
                         <Text style={[StyleObject.fontSize,StyleObject.textColor]}>添加新地址</Text>
                     </TouchableOpacity> : null
                 }
@@ -232,11 +232,5 @@ const styles = StyleSheet.create({
     EidtAddr:{
         flexDirection:'row',
         marginRight:10,
-    },
-    addNewAddr:{
-        paddingTop:10,
-        paddingBottom:10,
-        backgroundColor:'#FC0844',  
-        alignItems:'center',
     },
 });

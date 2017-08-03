@@ -15,7 +15,7 @@ import Tab from './tab';
 import Icon from 'react-native-vector-icons/Ionicons';
 import UserInfo from './userInfo';
 import Nav from './navigator';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator,NavigationActions } from 'react-navigation';
 //const imgUri = ;
 class HeadImg extends Component {
     constructor(props){
@@ -141,6 +141,10 @@ export default class Person extends Component {
 
     render(){
       const { navigate } =  this.props.navigation;
+      const navigateAction = NavigationActions.navigate({
+          rootName:'Order',
+          action:NavigationActions.navigate({routeName:'OrderDetail'})
+      })
         return(
             <ScrollView>
                 <StatusBar
@@ -341,7 +345,16 @@ export default class Person extends Component {
                                 title = '我的下级'
                             />
                 </TouchableOpacity>
-                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('Order')}>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>{
+                         const navigationAction = NavigationActions.navigate({
+                            routeName:'OrderDetail',
+                            params:{},
+                            // action:NavigationActions.navigate({routeName:'OrderDetail'})
+                        }); 
+                    this.props.navigation.dispatch(navigationAction); 
+                    navigate('Order');
+                }}
+                >
                     <Tab
                         barType = 'tabBar'
                         icon = 'ios-people'

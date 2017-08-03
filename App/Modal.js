@@ -207,7 +207,7 @@ class ModalDetail extends Component {
                     </View>
                 </View>
                 <TouchableHighlight underlayColor='transparent'
-                    style={[StyleObject.center, styles.modalBottomBtn]}
+                    style={StyleObject.pageBottomBtn}
                     onPress={this.props.closeModal}
                 >
                     <Text style={[StyleObject.textColor,StyleObject.fontSize]}>立即购买</Text>
@@ -317,7 +317,7 @@ class ModalDetail extends Component {
                         </View>
                     </View>
                     <TouchableHighlight underlayColor='transparent'
-                        style={[StyleObject.center, styles.modalBottomBtn]}
+                        style={StyleObject.pageBottomBtn}
                         onPress={this.props.closeModal}
                     >
                         <Text style={[StyleObject.textColor,StyleObject.fontSize]}>立即购买</Text>

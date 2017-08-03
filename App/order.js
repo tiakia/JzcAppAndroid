@@ -187,7 +187,7 @@ class AllOrder extends Component {
     }
     render(){
         return(
-            <OrderList orderData={this.state.orderData}/>
+            <OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
         )
     }
 }
@@ -204,7 +204,7 @@ class WaitEval extends Component {
     }
     render(){
         return(
-            <OrderList orderData={this.state.orderData}/>
+            <OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
         )
     }
 }
@@ -221,8 +221,8 @@ class WaitReceiveGoods extends Component {
     }
     render(){
         return(
-            <OrderList orderData={this.state.orderData}/>
-        )
+            <OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
+        ) 
     }
 }
 //待发货
@@ -238,7 +238,7 @@ class WaitSendGoods extends Component {
     }
     render(){
         return(
-            <OrderList orderData={this.state.orderData}/>
+            <OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
         )
     }
 }
@@ -260,7 +260,7 @@ class RefundAfterSale extends Component {
     }
     render(){
         return(
-            <OrderList orderData={this.state.orderData}/>
+            <OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
         )
     }
 }
@@ -268,7 +268,7 @@ class RefundAfterSale extends Component {
 const Order = TabNavigator({
     AllOrder: {
         screen: AllOrder,
-    },
+    }, 
     WaitSendGoods: {
         screen: WaitSendGoods,
     },
@@ -313,19 +313,6 @@ class OrderList extends Component {
         this.renderShopList = this.renderShopList.bind(this);
         this.OrderButton = this.OrderButton.bind(this);
     }
-    static navigationOptions = ({navigation})=>{
-        const {state,setParams,goBack} = navigation;
-        return {
-            headerTitle:'我的订单', 
-            headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,color:'#F4013C'},
-            headerStyle:{height:50,paddingTop:20,},
-            headerLeft: (
-                        <TouchableOpacity onPress={()=>goBack()}>
-                            <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
-                        </TouchableOpacity>
-                    ), 
-        }
-    }
     OrderButton(orderId){
         return [
             {   //待付款
@@ -358,7 +345,7 @@ class OrderList extends Component {
                     },
                     {
                         title:'退款',
-                        handlePress:()=>alert(orderId3),
+                        handlePress:()=>alert(orderId),
                         active: true,
                     },
                 ]
@@ -399,7 +386,7 @@ class OrderList extends Component {
                     },
                     {
                         title:'评价',
-                        handlePress:()=>alert(orderId),
+                        handlePress:()=>this.props.navigation.navigate('Evaluate'),
                         active: true,
                     },
                 ]
@@ -435,8 +422,8 @@ class OrderList extends Component {
     }
     renderShopList(val,idx,status){
         return(
-            <View style={[styles.orderFlexDir,styles.orderJustify,styles.orderPadding]} key={idx}>
-                <View style={styles.orderFlexDir}>
+            <View style={[StyleObject.flexRow,styles.orderJustify,styles.orderPadding]} key={idx}>
+                <View style={StyleObject.flexRow}>
                     <Text style={[StyleObject.fontSize]}> {val.shopName} </Text>
                     <Icon name='ios-arrow-forward' size={15} />
                 </View>
@@ -460,7 +447,7 @@ class OrderList extends Component {
     }
     renderOrderButton(status,orderId){
         return (
-             <View style={[styles.orderFlexDir,styles.orderPadding,{justifyContent:'flex-end'}]}>
+             <View style={[StyleObject.flexRow,styles.orderPadding,{justifyContent:'flex-end'}]}>
                 {
                   this.OrderButton(orderId).map((val,idx)=>{
                          if(val.status.indexOf(status) != -1){
@@ -480,40 +467,43 @@ class OrderList extends Component {
             </View>
         )
     }
-    renderOrderList(val,idx,shopName,status){
+    renderOrderList(val,idx,shopName,status,orderId){
             return( 
-                <View style={[styles.orderFlexDir,styles.orderDetail]} key={idx}>
+                <TouchableOpacity style={[StyleObject.flexRow,StyleObject.orderDetail]} key={idx}
+                                  onPress={()=>{this.props.navigation.navigate('OrderDetail',{orderId:orderId})}}
+                >
                     <View>
                             <Image source={{uri:val.goodsImg}}
                                 style={{height:100,width:100,marginRight:5,}}
                             />
                     </View>
                     <View>
-                            <Text style={[styles.orderDetailText,StyleObject.fontSize]}
+                            <Text style={[StyleObject.orderDetailText,StyleObject.fontSize]}
                                 numberOfLines= {2}
                             >
                                 {val.goodsText}
                             </Text>
-                            <Text style={[styles.orderTextColor,StyleObject.fontSize]}>{val.goodsType.map((val,idx)=>{
+                            <Text style={[StyleObject.orderTextColor,StyleObject.fontSize]}>{val.goodsType.map((val,idx)=>{
                                 return val.type +" ： "+ val.detail;
                             })}</Text>
                     </View>
-                    <View style={styles.orderPrice}>
+                    <View style={StyleObject.orderPrice}>
                         <View style={{alignItems:'flex-end',marginBottom:8}}>
                                 <Text style={StyleObject.fontSize}>{val.goodsPrice}</Text>
-                                <Text style={[styles.orderTextColor,{textDecorationLine:'line-through'},StyleObject.fontSize]}>¥ {val.goodsPriceDiscount}</Text>
+                                <Text style={[StyleObject.orderTextColor,{textDecorationLine:'line-through'},StyleObject.fontSize]}>¥ {val.goodsPriceDiscount}</Text>
                         </View>
-                        <Text style={[styles.orderTextColor,StyleObject.fontSize]}> ×{val.goodsNum} </Text>
+                        <Text style={[StyleObject.orderTextColor,StyleObject.fontSize]}> ×{val.goodsNum} </Text>
                         {
                            val.goodsStatus ? 
                             <Text style={[{marginTop:10},StyleObject.activeTextColor,StyleObject.fontSize]}>{val.goodsStatus}</Text> :
                             null
                         }
                     </View>
-                </View>
+                </TouchableOpacity>
             )
     }
     render(){
+        const { navigate } = this.props.navigation;
         return(
             <ScrollView style={StyleObject.flex}>
                 {
@@ -530,7 +520,7 @@ class OrderList extends Component {
                                     }
                                     {   
                                         goods.map((val,idx)=>
-                                            this.renderOrderList(val,idx,shopName,status))
+                                            this.renderOrderList(val,idx,shopName,status,orderId))
                                     }
                                     <View style={styles.orderAmount}>
                                         <Text style={StyleObject.fontSize}>共{val.shopNum}件商品   合计：999（含运费 ¥ 20）</Text>
@@ -555,7 +545,6 @@ class OrderButton extends Component {
     render(){
         const type = this.props.type;
         const isActive = this.props.isActive;
-        console.log(isActive+'');
         if(type == 'collect'){
             return(
                 <TouchableOpacity style={[styles.orderButton,{borderColor:'#F80C49'}]}>
@@ -577,7 +566,7 @@ class OrderButton extends Component {
     }
 }
 
-export default class OrderScreen extends Component {
+/* class OrderScreen extends Component {
     constructor(props){
         super(props);
     }
@@ -599,7 +588,9 @@ export default class OrderScreen extends Component {
             <Order/>
         )
     }
-}
+} */
+
+export default Order;
 
 const styles=StyleSheet.create({
     orderItem:{
@@ -607,14 +598,8 @@ const styles=StyleSheet.create({
         backgroundColor:"#fff",
         paddingTop:5,
     },
-    orderFlexDir:{
-        flexDirection:'row'
-    },
     orderJustify:{
         justifyContent:'space-between',
-    },
-    orderTextColor:{
-        color:'#9c9c9c'
     },
     orderPadding:{
         paddingLeft:10,
@@ -625,28 +610,10 @@ const styles=StyleSheet.create({
          borderColor:'#f5f5f5',
          marginTop:5,
     },
-    orderDetail: {
-        backgroundColor:'#F6F6F6',
-        paddingLeft:15,
-        paddingRight:15,
-        paddingTop:5,
-        paddingBottom:5,
-        marginTop:5,
-    },
-    orderDetailText:{
-        height:52,
-        width:155,
-        lineHeight:25,
-    },
     orderAmount:{
         alignItems:'flex-end',
         marginTop:10,
         marginBottom:10,
-    },
-    orderPrice:{
-        alignItems:'flex-end',
-        flex:1,
-        marginTop:5,
     },
     orderButton:{
         paddingLeft:8,

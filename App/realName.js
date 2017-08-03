@@ -142,7 +142,7 @@ export default class RealName extends Component {
 									 <Icon name='ios-add' size={60}/>
 						   			 <Text>请上传身份证正面照片</Text> 	
 								</View> :
-								<Image style={styles.avatar} source={this.state.avatarFront} />
+								<Image style={styles.avatar} source={require(this.state.avatarFront)} />
 							}
 					  </TouchableOpacity>
 					  <TouchableOpacity style={styles.selectImg} onPress={()=>{this.selectPhotoTapped('reverse')}}>
@@ -151,7 +151,7 @@ export default class RealName extends Component {
 									 <Icon name='ios-add' size={60}/>
 						   			 <Text>请上传身份证反面照片</Text> 	
 								</View> :
-								<Image style={styles.avatar} source={this.state.avatarReverce} />
+								<Image style={styles.avatar} source={require(this.state.avatarReverce)} />
 							}
 					  </TouchableOpacity>
 				 </View>	

@@ -164,7 +164,7 @@ export default class EditAddr extends Component {
                     </View>
                </View>
 
-                <TouchableOpacity style={styles.deleteAddr} onPress={()=>this.setModalVisible(true)}>
+                <TouchableOpacity style={StyleObject.pageBottomBtn} onPress={()=>this.setModalVisible(true)}>
                         <Text style={[StyleObject.fontSize,StyleObject.textColor]}>删除地址</Text>
                 </TouchableOpacity>
 
@@ -255,12 +255,6 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'flex-start',
         alignItems:"flex-start"
-    },
-    deleteAddr:{
-            paddingTop:10,
-            paddingBottom:10,
-            backgroundColor:'#FC0844',  
-            alignItems:'center',
     },
     receiveAddrModal:{
         backgroundColor:"rgba(0,0,0,.5)"

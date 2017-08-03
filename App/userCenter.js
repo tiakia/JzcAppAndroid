@@ -50,6 +50,10 @@ import ReceiveAddr from './receiveAddr';
 import EditAddr from './editAddr';
 import AddNewAddr from './addNewAddr';
 import OrderScreen from './order';
+import ConfirmOrder from './confirmOrder';
+import PayDetail from './payDetail';
+import OrderDetail from './orderDetail';
+import Evaluate from './evaluate';
 
 const goodsData = [
     {
@@ -366,6 +370,33 @@ const UserCenter = StackNavigator({
     },
     Order:{
         screen: OrderScreen,
+        navigationOptions:({navigation})=>({
+            headerTitle:'我的订单', 
+            headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,color:'#F4013C'},
+            headerStyle:{height:50,paddingTop:20,},
+            headerLeft: (
+                        <TouchableOpacity onPress={()=>navigation.goBack()}>
+                            <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+                        </TouchableOpacity>
+                    ), 
+             headerRight:(
+                <View style={{width:20}}>
+
+                </View>
+            ),
+        })
+    },
+    ConfirmOrder:{
+        screen: ConfirmOrder,
+    },
+    PayDetail:{
+        screen: PayDetail,
+    },
+    OrderDetail:{
+        screen: OrderDetail,
+    },
+    Evaluate:{
+        screen: Evaluate,
     },
     Search: { screen: Search },
     GoodsDetail: { screen: GoodsDetailNav },

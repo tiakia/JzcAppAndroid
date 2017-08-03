@@ -126,6 +126,7 @@ class GoodsDetailNav extends Component {
                     </ScrollView>
                     <GoodsDetailBar goodsDetailBar={goodsDetailBar}
                                     toIndex ={()=>navigate("Home")}
+                                    confirmOrder={()=>navigate("ConfirmOrder")}
                     />
                     <ModalContent 
                               modal={this.state.modalVisible}
@@ -146,7 +147,7 @@ class GoodsDetailNav extends Component {
     }
 };
 
-class GoodDetail extends Component {
+export class GoodDetail extends Component {
     constructor(props) {
         super(props);
         const { imagesData , imageDetailData } = props;

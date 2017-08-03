@@ -50,7 +50,9 @@ export default class GoodsDetailBar extends Component {
         <TouchableOpacity  style={[styles.goodsDetailBarText,styles.tabItem,styles.textBar]}>
                         <Text style={[{color:'#fff',},StyleObject.fontSize]}>加入购物车</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.goodsDetailBarText,styles.tabItem,styles.textBar]}>
+        <TouchableOpacity style={[styles.goodsDetailBarText,styles.tabItem,styles.textBar]} 
+                          onPress={this.props.confirmOrder}
+        >
                         <Text style={[{color:'#fff',},StyleObject.fontSize]}>立即购买</Text>
         </TouchableOpacity>
     </View>

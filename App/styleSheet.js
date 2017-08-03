@@ -148,7 +148,7 @@ let StyleObject = {
            borderRightWidth:1,
            borderColor:'#ddd',
            width:25,
-           marginBottom:-7,
+           padding:0,
            textAlign:'center',
        },
        goodsItems:{
@@ -304,6 +304,40 @@ let StyleObject = {
             borderTopWidth:1/PixelRatio.get(),
             borderColor:'#ddd'
         },
+        flexRow:{
+            flexDirection:'row'
+        },
+        orderTextColor:{
+            color:'#9c9c9c'
+        },
+        orderDetail: {
+            backgroundColor:'#F6F6F6',
+            paddingLeft:15,
+            paddingRight:15,
+            paddingTop:5,
+            paddingBottom:5,
+            marginTop:5,
+        },
+        orderDetailText:{
+            width:155,
+            lineHeight:20,
+            marginBottom:10,
+        },
+        orderPrice:{
+            alignItems:'flex-end',
+            flex:1,
+            marginTop:5,
+        },
+        normalColor:{
+            color:'#1d1d1d'
+        },
+        pageBottomBtn:{
+            paddingTop:10,
+            paddingBottom:10,
+            backgroundColor:'#FC0844',  
+            alignItems:'center',
+            justifyContent:'center',
+        }
 }
 
 const styles = StyleSheet.create(StyleObject);
