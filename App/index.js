@@ -26,8 +26,8 @@ export default class Index extends Component{
             imagesData:props.imagesData,
             goodsItemData:props.goodsItemData,
             brand:props.brand,
-            goodsData:props.goodsData,
-        }
+            goodsData:props.goodsData
+        };
     }
     // goodsDetail={this.props.toGoodsDetail}
     render(){
@@ -46,12 +46,14 @@ export default class Index extends Component{
                     />
                 </View>
                 <View style={styles.mainSplitLine}>
-                    <Image source={{uri:'https://img.alicdn.com/bao/uploaded/i8/TB1vLcbQXXXXXakXpXXYXGcGpXX_M2.SS2_430x430q90.jpg'}}
+                    <Image source={{uri:'https://aecpm.alicdn.com/simba/img/TB1CWf9KpXXXXbuXpXXSutbFXXX.jpg_q50.jpg'}}
                            style={{height:100,width:Dimensions.get('window').width}}
                     />
                 </View>
                 <View style={[styles.mainSplitLine,{backgroundColor:'#fff'}]}>
-                    <Recommen  type='brand' brand={this.state.brand} />
+                <Recommen  type='brand' brand={this.state.brand}
+                       xx    navigation={this.props.navigation}
+		/>
                 </View>
                 <View style={[styles.mainSplitLine,{backgroundColor:'#fff'}]}>
                     <Recommen  type='goods' goodsData={this.state.goodsData} navigation={this.props.navigation}/>

@@ -16,24 +16,32 @@ export default class Goods extends Component {
         super(props);
         const { goodsData } = props;
         this.state={
-            goodsData:props.goodsData,
-        }
+            goodsData:props.goodsData
+        };
         this.renderGoods = this.renderGoods.bind(this);
     }
     renderGoods(data,idx){
         return (
-            <TouchableOpacity style={styles.goodsItem} key={idx} 
-                                onPress={()=>this.props.navigation.navigate('GoodsDetail',{info:data.detailText})} 
+		<TouchableOpacity style={[styles.goodsItem,{marginTop:8}]} key={idx}
+                                onPress={()=>this.props.navigation.navigate('GoodsDetail',{info:data.detailText})}
             >
                 <View >
                     {
                         this.props.type == 'goods' ?
                         <Image source={{uri:data.img}}
-                                                   style={{height:200,width:'100%'}}
-                                            /> :
-                        <Image source={{uri:data.img}}
-                                                   style={{height:120,width:'100%'}}
-                                            />
+                      style={{height:200,width:'100%'}}
+                      resizeMode={Image.resizeMode.contain}
+                            /> :
+			this.props.type == 'classifyGoods' ?
+			     <Image source={{uri:data.img}}
+                        style={{height:100,width:'100%',marginTop:15}}
+			resizeMode='contain'
+                            />
+
+			:   <Image source={{uri:data.img}}
+                      style={{height:120,width:'100%'}}
+                      resizeMode = {Image.resizeMode.contain}
+                            />
                     }
                 </View>
 
@@ -44,7 +52,7 @@ export default class Goods extends Component {
                 </View>
 
                 {
-                    this.props.type == 'goods' ?
+                    this.props.type == 'goods' || this.props.type == 'classifyGoods' ?
                     <View style={[StyleObject.flexDirection,styles.goodsPri]}>
                         <View>
                             <Text style={[StyleObject.activeTextColor,StyleObject.fontSize]}>{data.price}</Text>
@@ -60,10 +68,12 @@ export default class Goods extends Component {
     }
     renderGoodsListView(data,idx){
         return (
-            <View style={styles.goodsListViewItem} key={idx}>
+		<TouchableOpacity style={styles.goodsListViewItem} key={idx}
+	                           onPress={()=>this.props.navigation.navigate('GoodsDetail',{info:data.detailText})} 
+		>
                 <View style={styles.goodsListImg}>
                     <Image source={{uri:data.img}}
-                            style={{height:120,width:220}}
+                            style={{height:80,width:150}}
                     />
                 </View>
 
@@ -82,7 +92,7 @@ export default class Goods extends Component {
                         </View>
                     </View> 
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     render(){
@@ -108,9 +118,10 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
     },
     goodsListContainer:{
+
     },
     goodsItem:{
-        width:'47%',
+        width:'45%',
         marginRight:10,
         marginBottom:10,
     },
@@ -132,6 +143,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-around',
         marginBottom:15,
+	marginTop:10,
     },
     goodsListImg:{
         marginLeft:15,

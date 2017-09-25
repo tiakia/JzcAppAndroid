@@ -175,7 +175,7 @@ const orderData = [
     }
 ];
 //全部
-class AllOrder extends Component {
+export class AllOrder extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -209,15 +209,33 @@ class WaitEval extends Component {
     }
 }
 //待收货
-class WaitReceiveGoods extends Component {
+export class WaitReceiveGoods extends Component {
     constructor(props){
         super(props);
         this.state={
             orderData: orderData.filter((item)=>{return item.status == '2.1.2'})
         }
     }
-    static navigationOptions = {
-        tabBarLabel: '待收货'
+    static navigationOptions =({navigation})=>{
+	const {state,goBack} = navigation;
+	if(state.params.isHeaderShow){
+	return{
+	    headerTitle:'待收货',
+	    headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:12,},
+	    headerStyle:{height:50,paddingTop:20},
+	    headerLeft:(
+		    <TouchableOpacity onPress={()=>goBack()}>
+		    <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+		    </TouchableOpacity>
+	    ),
+	    headerRight:<View style={{width:20}}></View>
+	}
+	}else{
+	    return {
+		        tabBarLabel: '待收货'
+	    }
+	}
+
     }
     render(){
         return(
@@ -226,20 +244,38 @@ class WaitReceiveGoods extends Component {
     }
 }
 //待发货
-class WaitSendGoods extends Component {
+export class WaitSendGoods extends Component {
     constructor(props){
         super(props);
         this.state={
             orderData: orderData.filter((item)=>{return item.status == '2.1.1'})
-        }
+        };
     }
-    static navigationOptions ={
-        tabBarLabel: '待发货',
+    static navigationOptions =({navigation})=>{
+	const {state,goBack} = navigation;
+	if(state.params.isHeaderShow){
+	return{
+	    headerTitle:'待发货',
+	    headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:12,},
+	    headerStyle:{height:50,paddingTop:20},
+	    headerLeft:(
+		    <TouchableOpacity onPress={()=>goBack()}>
+		    <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+		    </TouchableOpacity>
+	    ),
+	    headerRight:<View style={{width:20}}></View>
+	};
+	}else{
+	    return {
+		        tabBarLabel: '待发货'
+	    };
+	}
+
     }
     render(){
         return(
             <OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
-        )
+        );
     }
 }
 //退款/售后
@@ -264,6 +300,69 @@ class RefundAfterSale extends Component {
         )
     }
 }
+//待付款
+export class WaitPay extends Component{
+    constructor(props){
+	super(props);
+	this.state = {
+	    orderData: orderData.filter((item)=>{return item.status == '2.2.1'})
+	}
+    }
+    static navigationOptions = ({navigation}) => {
+	const {state,goBack} = navigation;
+	if(state.params.isHeaderShow){
+	return{
+	    headerTitle:'待付款',
+	    headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:12,},
+	    headerStyle:{height:50,paddingTop:20},
+	    headerLeft:(
+		    <TouchableOpacity onPress={()=>goBack()}>
+		    <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+		    </TouchableOpacity>
+	    ),
+	    headerRight:<View style={{width:20}}></View>
+	}
+	}
+    }
+    render(){
+	return(
+		<OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
+	)
+    }
+}
+//已完成
+export class Ready extends Component{
+    constructor(props){
+	super(props);
+	this.state = {
+	    orderData: orderData.filter((item)=>{return item.status == ('1.1' || '1.2' || '1.3')})
+	}
+    }
+    static navigationOptions = ({navigation}) => {
+		const {state,goBack} = navigation;
+	if(state.params.isHeaderShow){
+	return{
+	    headerTitle:'已完成',
+	    headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:12,},
+	    headerStyle:{height:50,paddingTop:20},
+	    headerLeft:(
+		    <TouchableOpacity onPress={()=>goBack()}>
+		    <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+		    </TouchableOpacity>
+	    ),
+	    headerRight:<View style={{width:20}}></View>
+	}
+	}
+
+    }
+    render(){
+	return(
+		<OrderList orderData={this.state.orderData} navigation={this.props.navigation}/>
+	)
+    }
+}
+
+
 
 const Order = TabNavigator({
     AllOrder: {
@@ -302,7 +401,7 @@ const Order = TabNavigator({
     }
 });
 
-class OrderList extends Component {
+export class OrderList extends Component {
     constructor(props){
         super(props);
         const { orderData } = props;
@@ -538,7 +637,7 @@ class OrderList extends Component {
     }
 }
 
-class OrderButton extends Component {
+export class OrderButton extends Component {
     constructor(props){
         super(props);
     }
@@ -616,15 +715,17 @@ const styles=StyleSheet.create({
         marginBottom:10,
     },
     orderButton:{
-        paddingLeft:8,
+        paddingLeft:10,
         paddingTop:2,
         paddingBottom:2,
-        paddingRight:8,
+        paddingRight:10,
         borderWidth:1,
         borderColor:"#9c9c9c",
         marginRight:10,
         marginTop:5,
         marginBottom:5,
         borderRadius:15,
+	alignItems:'center',
+	justifyContent:'center',
     }
 });

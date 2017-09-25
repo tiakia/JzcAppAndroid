@@ -1,18 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   Text,
   View,
   Image,
   Dimensions,
   StatusBar,
-} from 'react-native'
+} from 'react-native';
 import Swiper from 'react-native-swiper';
 import Nav from './navigator.js';
 import StyleObject from './styleSheet';
-const { width } = Dimensions.get('window')
+const { width } = Dimensions.get('window');
 
 const styles = {
   wrapper: {
+
   },
 
   slide: {
@@ -21,7 +22,7 @@ const styles = {
     alignItems:'center',
     backgroundColor: '#000',
     marginLeft:10,
-    marginRight:10,
+    marginRight:10
   },
 
   text: {
@@ -34,7 +35,7 @@ const styles = {
     width,
     flex: 1
   }
-}
+};
 
 export default class MySwiper extends Component {
   constructor(props){
@@ -43,14 +44,14 @@ export default class MySwiper extends Component {
     this.state={
         swiperImages : imagesData,
         swiperShow: false,
-    }
+    };
   }
   componentDidMount(){
     setTimeout(()=>{
         this.setState({
             swiperShow:true
         });
-    },0)
+    },0);
 }
   render () {
     const { type } = this.props;
@@ -72,26 +73,16 @@ export default class MySwiper extends Component {
                       this.state.swiperImages.map((val,idx)=>{
                           return (
                               <View style={styles.slide} key={idx}>
-                                <Image style={styles.image} source={{uri:val.uri}} />
+                              <Image style={styles.image} source={{uri:val.uri}} resizeMode={Image.resizeMode.contain} resizeMethod={'scale'}/>
                               </View>
-                          )
+                          );
                       })
                   }
             </Swiper>
           )
         }else if(type == 'goodsDetail'){
           return (
-            <View>
-              <StatusBar
-                            translucent={true}
-                            backgroundColor='transparent'
-                            barStyle='dark-content'
-              />
-              <Nav
-                  type="fullIcon"
-                  goToBack={this.props.goToBack}
-                  goToCart={this.props.goToCart}
-              />
+		  <View style={StyleObject.flex}>
             <Swiper
                   style={styles.wrapper}
                   height={320}
@@ -105,10 +96,22 @@ export default class MySwiper extends Component {
                               <View style={StyleObject.flex} key={idx}>
                                 <Image style={styles.image} source={{uri:val.uri}} />
                               </View>
-                          )
+                          );
                       })
                   }
-            </Swiper>
+              </Swiper>
+		   <View style={{
+		      position:'absolute',
+		       top:10,
+		       left:0,
+		       right:0,
+		  }}>
+		    <Nav
+                        type="fullIcon"
+                        goToBack={this.props.goToBack}
+                        goToCart={this.props.goToCart}
+	            />
+		  </View>
             </View>
           )
         }
@@ -117,7 +120,7 @@ export default class MySwiper extends Component {
         <View style={{height:200}}>
             <Image source={ require('./../images/head.jpg')} style={styles.image} />
         </View>
-      )
+      );
     }
   }
 }

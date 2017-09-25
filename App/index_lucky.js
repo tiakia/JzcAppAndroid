@@ -47,7 +47,7 @@ export default class Lucky extends Component {
             <View style={[StyleObject.center,styles.luckyGoods]} key={index}>
                 <View style={[StyleObject.center,styles.luckyImgCon]}>
                     <Image source={{uri:data.img}}
-                        style={{width:80,height:80}}
+                        style={{width:70,height:70}}
                     />
                 </View>
                 <View style={StyleObject.center}>
@@ -105,7 +105,6 @@ const styles=StyleSheet.create({
         backgroundColor:'#F50A43',
         borderRadius:5,
         marginTop:2,
-        width:"100%",
         padding:2,
         width:'80%',
     },

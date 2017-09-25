@@ -1,3 +1,4 @@
+
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -16,7 +17,179 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import UserInfo from './userInfo';
 import Nav from './navigator';
 import { StackNavigator,NavigationActions } from 'react-navigation';
+
 //const imgUri = ;
+
+// const Addr = [
+//     {
+//         addrId:1,
+//         receiveName: 'ing',
+//         receivePhone: '15834029762',
+//         receiveAddr: '山西省太原市小店区',
+//         receiveStreet:'晋阳街长治路口天骄科技园8层口fdjsklajfldsfjdsa;fljkdsaf ',
+//         isDefault: true,
+//     },
+//     {
+//         addrId:2,
+//         receiveName: '五月天',
+//         receivePhone: '15834029762',
+//         receiveAddr: '山西省太原市小店区',
+//         receiveStreet:'晋阳街长治路口天骄科技园8层',
+//         isDefault: false,
+//     },
+//     {
+//         addrId:3,
+//         receiveName: 'linken',
+//         receivePhone: '15834029762',
+//         receiveAddr: '山西省太原市小店区',
+//         receiveStreet:'晋阳街长治路口天骄科技园8层',
+//         isDefault: false,
+//     },
+// ];
+
+
+const orderData = [
+  {//一个订单
+        orderId: 1, //订单ID
+        status: '2.1.1', //订单状态
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
+        ],
+    },
+    {//一个订单
+        orderId: 2, //订单ID
+        status: '2.1.2', //订单状态
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
+        ],
+    },
+    {//一个订单
+        orderId: 3, //订单ID
+        status: '1.1', //订单状态
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
+        ],
+    },
+    {//一个订单
+        orderId: 4, //订单ID
+        status: '2.2.1', //订单状态
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
+        ],
+    },
+    {//一个订单
+        orderId: 5, //订单ID
+        status: '1.2', //订单状态
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
+        ],
+    },
+    {//一个订单
+        orderId: 6, //订单ID
+        status: '4.1', //订单状态
+        shopId: 123,
+        shopName:'Armani阿玛尼', //商铺名字
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:2,
+            },
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+                goodsStatus: '退款中'
+            },
+        ],
+            
+    },
+    {//一个订单
+        orderId: 7, //订单ID
+        status: "4.4", //订单状态
+        shopName:'f4d5s64f65s', //商铺名字
+        shopId: 123,
+        goods:[ //一个对象是一家店铺内的一个商品
+            {
+                goodsImg:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg',
+                goodsText:"2017s/s金属一排扣随性微长袖Bomber Jacket范德萨浪费公共健康的绿色",
+                goodsType:[ //商品类型
+                            {type:'颜色分类',detail:'深藏青'}
+                        ],
+                goodsPrice: 1899,
+                goodsPriceDiscount:999,
+                goodsNum:1,
+            },
+        ],
+    }
+];
+
+
 class HeadImg extends Component {
     constructor(props){
         super(props);
@@ -106,6 +279,9 @@ const flatData = [
 export default class Person extends Component {
     constructor(props){
         super(props);
+	this.state={
+	    //	    Addr:Addr,
+	}
     }
 
     RenderItem({itemData},type){
@@ -141,10 +317,6 @@ export default class Person extends Component {
 
     render(){
       const { navigate } =  this.props.navigation;
-      const navigateAction = NavigationActions.navigate({
-          rootName:'Order',
-          action:NavigationActions.navigate({routeName:'OrderDetail'})
-      })
         return(
             <ScrollView>
                 <StatusBar
@@ -178,21 +350,27 @@ export default class Person extends Component {
                         />
                     </View>
                 </TouchableOpacity>
-                 <View style={[StyleObject.flexDirection,StyleObject.splitLine,StyleObject.cardDetail]}>
+                <View style={[StyleObject.flexDirection,StyleObject.splitLine,StyleObject.cardDetail]}>
+		<TouchableOpacity onPress={()=>navigate('WaitPay',{isHeaderShow:true})}>
                         <Tab
                             barType = 'barSup'
                             icon = 'ios-people'
                             iconColor = '#50CAFE'
                             title = '待付款'
                             iconSize = {25}
-                        />
+	    
+                />
+		</TouchableOpacity>
+		<TouchableOpacity  onPress={()=>navigate('WaitSendGoods',{isHeaderShow:true})}>
                         <Tab
                             barType = 'barSup'
                             icon = 'ios-people'
                             iconColor = '#50CAFE'
                             title = '待发货'
                             iconSize = {25}
-                        />
+                />
+		</TouchableOpacity>
+	    <TouchableOpacity onPress={()=>navigate('WaitReceiveGoods',{isHeaderShow:true})}>
                         <Tab
                             barType = 'barSup'
                             icon = 'ios-people'
@@ -200,14 +378,17 @@ export default class Person extends Component {
                             title = '待收货'
                             iconSize = {25}
                             subTitle = '16'
-                        />
+                />
+		</TouchableOpacity>
+	<TouchableOpacity onPress={()=>navigate('Ready',{isHeaderShow:true})}>
                         <Tab
                             barType = 'barSup'
                             icon = 'ios-people'
                             iconColor = '#50CAFE'
                             title = '已完成'
                             iconSize = {25}
-                        />
+                />
+		</TouchableOpacity>
                 </View>
                 <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('UserMoney')}>
                             <Tab
@@ -345,15 +526,7 @@ export default class Person extends Component {
                                 title = '我的下级'
                             />
                 </TouchableOpacity>
-                <TouchableOpacity style={StyleObject.card} onPress={()=>{
-                         const navigationAction = NavigationActions.navigate({
-                            routeName:'OrderDetail',
-                            params:{},
-                            // action:NavigationActions.navigate({routeName:'OrderDetail'})
-                        }); 
-                    this.props.navigation.dispatch(navigationAction); 
-                    navigate('Order');
-                }}
+            <TouchableOpacity style={StyleObject.card} onPress={()=>{navigate('Order',{isHeaderSHow: true});}}
                 >
                     <Tab
                         barType = 'tabBar'
@@ -370,7 +543,7 @@ export default class Person extends Component {
                                 title = '退款/退货及维修'
                             />
                 </TouchableOpacity>
-                <TouchableOpacity style={StyleObject.card}>
+                <TouchableOpacity style={StyleObject.card} onPress={()=>navigate('Evaluate')}>
                     <Tab
                         barType = 'tabBar'
                         icon = 'ios-people'
@@ -378,8 +551,8 @@ export default class Person extends Component {
                         title = '商品评价/晒单'
                     />
                 </TouchableOpacity>
-                <TouchableOpacity style={[StyleObject.card,StyleObject.splitLine]}>
-                            <Tab
+		<TouchableOpacity style={StyleObject.card} onPress={()=>navigate('ShopCollect')}>
+		             <Tab
                                 icon = 'ios-people'
                                 iconColor = '#F6C40C'
                                 title = '商品收藏'

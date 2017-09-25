@@ -10,11 +10,13 @@ import {
     StyleSheet,
     PixelRatio,
     Switch,
+    ToastAndroid,
 } from 'react-native';
 import StyleObject from './styleSheet.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import {StackNavigator,TabNavigator } from 'react-navigation';
+import { OrderButton } from './order';
 
 export default class OrderDetail extends Component {
     constructor(props){
@@ -135,8 +137,16 @@ export default class OrderDetail extends Component {
                             </View>
                         </View>
                 </ScrollView>
-                <View style={[styles.orderDetailSplitLine,{height:35,paddingTop:10,paddingBottom:10,backgroundColor:'#fff'}]}>  
-                       <Text>123</Text>     
+                <View style={[styles.orderDetailSplitLine,{justifyContent:'flex-end',backgroundColor:'#fff'},StyleObject.flexRow]}>  
+                <OrderButton
+	    title='提醒发货'
+	    handlPress={()=>ToastAndroid.show('提醒成功我们会尽快安排为您发货',ToastAndroid.SHORT,ToastAndroid.CENTER)}
+		/>
+		<OrderButton
+	    title='退款'
+	    handlePress={()=>alert('退款成功')}
+	    isActive={true}
+		/>
                 </View>
             </View>
             

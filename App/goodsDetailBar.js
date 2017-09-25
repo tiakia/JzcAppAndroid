@@ -27,6 +27,7 @@ export default class GoodsDetailBar extends Component {
         </TouchableOpacity>
         <TouchableOpacity 
                 style={[styles.tabItem,styles.iconBar]}
+                onPress={this.props.toCustomerServer}
         >
             <Icon name='ios-keypad'  size={20}/>
             <Text style={StyleObject.fontSize}>客服</Text>
@@ -39,7 +40,7 @@ export default class GoodsDetailBar extends Component {
                 this.state.isCollect ? 
                     <View style={StyleObject.center}>
                         <Icon name='ios-star' size={20} color="#FD0841"/>
-                        <Text style={StyleObject.fontSize}>已收藏</Text>
+                    <Text style={[StyleObject.fontSize,StyleObject.activeTextColor]}>已收藏</Text>
                     </View> :
                     <View style={StyleObject.center}>
                         <Icon name='ios-star-outline' size={20}/>

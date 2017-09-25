@@ -14,7 +14,7 @@ import {StackNavigator} from 'react-navigation';
 import StyleObject from './styleSheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Addr = [
+const Addr = [			
     {
         addrId:1,
         receiveName: 'ing',
@@ -41,6 +41,7 @@ const Addr = [
     },
 ];
 
+
 export default class ReceiveAddr extends Component {
     constructor(props){
         super(props);
@@ -56,7 +57,7 @@ export default class ReceiveAddr extends Component {
     }
     static navigationOptions = ({navigation}) => {
           const {state,setParams,goBack} = navigation;
-          const { type } = state.params;
+          const mode = state.params.type == 'normal';
            return{
                 headerTitle: '选择收货地址',
                 headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,color:'#F4013C'},
@@ -66,8 +67,8 @@ export default class ReceiveAddr extends Component {
                                 <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
                             </TouchableOpacity>
                         ), 
-                headerRight: <TouchableOpacity style={{marginRight:10}} onPress={()=>{setParams({type:'manage'})}}>
-                                    <Text style={StyleObject.fontSize}>管理</Text>
+               headerRight: <TouchableOpacity style={{marginRight:10}} onPress={()=>{setParams({type:mode?'manage':'normal'})}}>
+                   <Text style={StyleObject.fontSize}>{ mode  ? '管理' : '保存' }</Text>
                             </TouchableOpacity>
            };
     };
@@ -104,6 +105,7 @@ export default class ReceiveAddr extends Component {
             }
             return item;
         });
+//	console.log(newAddr);
         this.setState({
            receiveAddr : newAddr,
            modalVisible : false,
@@ -139,8 +141,7 @@ export default class ReceiveAddr extends Component {
                                 <TouchableOpacity style={styles.receiveAddrFlex} onPress={()=>this.changeDefault(idx)}>
                                     <Icon name='ios-radio-button-off-outline' size={20} style={styles.receiveAddrMarginRight}/>
                                     <Text style={StyleObject.fontSize}>设为默认</Text>
-                                </TouchableOpacity>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                            }
+                                </TouchableOpacity>                                                                                                                                                                                         }
                             <View style={styles.receiveAddrFlex}>
                                 <TouchableOpacity style={styles.EidtAddr} onPress={()=>navigate('EditAddr',{data:data})}>
                                         <Icon name='ios-create-outline' size={20} style={styles.receiveAddrMarginRight}/>
@@ -158,6 +159,23 @@ export default class ReceiveAddr extends Component {
        }else{
            return  null;
        }
+    }
+    componentWillMount(){
+	if(this.props.navigation.state.params){
+	    const data = this.props.navigation.state.params;
+	
+	    if(data.type == 'edit'){
+
+		console.log(data);
+
+	    }else if(data.type == 'delete'){
+
+		console.log(data);
+		
+		
+	    }
+	}
+	
     }
     render(){
         const {navigate,state} = this.props.navigation;

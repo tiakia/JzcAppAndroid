@@ -40,11 +40,13 @@ let StyleObject = {
           width:25,
           height:25,
           borderRadius:50,
+	  alignItems:'center',
       },
       fullIconCenter: {
           color:'#fff',
           textAlign:'center',
-          lineHeight:22
+          lineHeight:22,
+
       },
       active:{
           color:'#fd0841'

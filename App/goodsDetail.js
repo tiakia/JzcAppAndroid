@@ -43,13 +43,14 @@ const goodsDetailBar = [
 ];
 
 const imagesData = [
+     {
+        uri:'https://img.alicdn.com/imgextra/i4/2653351646/TB2tKIDnYFkpuFjy1XcXXclapXa_!!2653351646.jpg_430x430q90.jpg'
+    },
+
     {
         uri:'https://img.alicdn.com/imgextra/i3/2653351646/TB2mDWnq5RnpuFjSZFCXXX2DXXa_!!2653351646.jpg_430x430q90.jpg'
     },
-    {
-        uri:'https://img.alicdn.com/imgextra/i4/2653351646/TB2tKIDnYFkpuFjy1XcXXclapXa_!!2653351646.jpg_430x430q90.jpg'
-    },
-    {
+       {
         uri:'https://img.alicdn.com/imgextra/i3/2653351646/TB2L6GvqYlmpuFjSZFlXXbdQXXa_!!2653351646.jpg_430x430q90.jpg'
     },
     {
@@ -71,7 +72,7 @@ const imageDetailData = [
         url:'https://img.alicdn.com/imgextra/i2/3038920123/TB2hMPLuEhnpuFjSZFpXXcpuXXa_!!3038920123.jpg'
     },
 ]
-class GoodsDetailNav extends Component {
+export default class GoodsDetailNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -120,13 +121,14 @@ class GoodsDetailNav extends Component {
                                     imagesData = {this.state.imagesData}
                                     imageDetailData = {this.state.imageDetailData}
                                     goToBack={()=>{goBack(null)}}
-                                    goToCart={()=>navigate('Cart')}
+            goToCart={()=>navigate('Cart',{arrowShow:true})}
                                     modalShow={this.modalShow}
                         />
                     </ScrollView>
                     <GoodsDetailBar goodsDetailBar={goodsDetailBar}
                                     toIndex ={()=>navigate("Home")}
-                                    confirmOrder={()=>navigate("ConfirmOrder")}
+          confirmOrder={()=>navigate("ConfirmOrder")}
+          toCustomerServer = { ()=> navigate("CustomerServer")}
                     />
                     <ModalContent 
                               modal={this.state.modalVisible}
@@ -147,7 +149,7 @@ class GoodsDetailNav extends Component {
     }
 };
 
-export class GoodDetail extends Component {
+class GoodDetail extends Component {
     constructor(props) {
         super(props);
         const { imagesData , imageDetailData } = props;
@@ -551,4 +553,4 @@ const styles = StyleSheet.create({
 // });
 
 
-export default GoodsDetailNav;
+

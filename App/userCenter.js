@@ -1,17 +1,18 @@
 import React,{Component} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  PixelRatio,
-  Image,
-  ScrollView,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  StatusBar,
-  Dimensions,
-  Platform
+    StyleSheet,
+    Text,
+    View,
+    PixelRatio,
+    Image,
+    ScrollView,
+    FlatList,
+    TouchableOpacity,
+    TextInput,
+    StatusBar,
+    Dimensions,
+    Platform,
+    Button,
 } from 'react-native';
 import StyleObject from './styleSheet.js';
 import Tab from './tab';
@@ -54,192 +55,248 @@ import ConfirmOrder from './confirmOrder';
 import PayDetail from './payDetail';
 import OrderDetail from './orderDetail';
 import Evaluate from './evaluate';
+import ShopCollect from './shopCollect';
+import { Ready } from './order';
+import { WaitPay } from './order';
+import { WaitReceiveGoods } from './order';
+import { WaitSendGoods } from './order';
+import { AllOrder } from './order';
+import CustomerServer from './customerServer';
 
 const goodsData = [
     {
-        img:'https://img.alicdn.com/bao/uploaded/i3/TB1gzs5RXXXXXalXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
-        price:'¥ 320',
-        num:50,
+	img:'https://img.alicdn.com/bao/uploaded/i3/TB1gzs5RXXXXXalXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
+	price:'¥ 320',
+	num:50,
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i3/TB1un0JQFXXXXcUXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
-        price:'¥ 320',
-        num:50,
+	img:'https://img.alicdn.com/bao/uploaded/i3/TB1un0JQFXXXXcUXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
+	price:'¥ 320',
+	num:50,
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i2/TB1zDSDRFXXXXXqXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
-        price:'¥ 320',
-        num:50,
+	img:'https://img.alicdn.com/bao/uploaded/i2/TB1zDSDRFXXXXXqXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
+	price:'¥ 320',
+	num:50,
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i8/TB1vLcbQXXXXXakXpXXYXGcGpXX_M2.SS2_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
-        price:'¥ 320',
-        num:50,
+	img:'https://img.alicdn.com/bao/uploaded/i8/TB1vLcbQXXXXXakXpXXYXGcGpXX_M2.SS2_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
+	price:'¥ 320',
+	num:50,
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i3/TB1HavXSXXXXXXzXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
-        price:'¥ 320',
-        num:50,
+	img:'https://img.alicdn.com/bao/uploaded/i3/TB1HavXSXXXXXXzXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
+	price:'¥ 320',
+	num:50,
     },
 ];
 
 const goodsItemData = [
     {
-        img:'https://img.alicdn.com/bao/uploaded/i3/TB1gzs5RXXXXXalXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
+	img:'https://img.alicdn.com/bao/uploaded/i3/TB1gzs5RXXXXXalXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i3/TB1un0JQFXXXXcUXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
+	img:'https://img.alicdn.com/bao/uploaded/i3/TB1un0JQFXXXXcUXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i2/TB1zDSDRFXXXXXqXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
+	img:'https://img.alicdn.com/bao/uploaded/i2/TB1zDSDRFXXXXXqXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
     },
     {
-        img:'https://img.alicdn.com/bao/uploaded/i8/TB1vLcbQXXXXXakXpXXYXGcGpXX_M2.SS2_430x430q90.jpg',
-        detailText:'皮肤补水站-温和修护，璀璨焕白',
+	img:'https://img.alicdn.com/bao/uploaded/i8/TB1vLcbQXXXXXakXpXXYXGcGpXX_M2.SS2_430x430q90.jpg',
+	detailText:'皮肤补水站-温和修护，璀璨焕白',
     },
 ];
 
 const brand =[
     {
-        img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
-        brandName:'卡姿兰'
+	img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
+	brandName:'卡姿兰'
     },
     {
-        img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
-        brandName:'卡姿兰'
+	img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
+	brandName:'卡姿兰'
     },
     {
-        img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
-        brandName:'卡姿兰'
+	img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
+	brandName:'卡姿兰'
     },
     {
-        img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
-        brandName:'卡姿兰'
+	img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
+	brandName:'卡姿兰'
     },
     {
-        img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
-        brandName:'卡姿兰'
+	img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
+	brandName:'卡姿兰'
     },
     {
-        img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
-        brandName:'卡姿兰'
+	img:'http://img.alicdn.com/imgextra/i3/2968874950/TB2ncCYX1rAQeBjSZFPXXXbmXXa_!!2968874950.jpg_640x640q50.jpg',
+	brandName:'卡姿兰'
     },
 ];
 
 const imagesData = [
     {
-      uri:'https://img.alicdn.com/bao/uploaded/i3/TB14c1tSXXXXXbjXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg'
+	uri:'https://img.alicdn.com/bao/uploaded/i3/TB14c1tSXXXXXbjXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg'
     },
     {
-      uri:'https://img.alicdn.com/imgextra/i1/822320219/TB2sXdsoXXXXXXLXpXXXXXXXXXX_!!822320219.jpg_430x430q90.jpg'
+	uri:'https://img.alicdn.com/imgextra/i1/822320219/TB2sXdsoXXXXXXLXpXXXXXXXXXX_!!822320219.jpg_430x430q90.jpg'
     },
     {
-      uri:'https://img.alicdn.com/imgextra/i1/822320219/TB2rPFEoXXXXXbiXXXXXXXXXXXX_!!822320219.jpg_430x430q90.jpg'
+	uri:'https://img.alicdn.com/imgextra/i1/822320219/TB2rPFEoXXXXXbiXXXXXXXXXXXX_!!822320219.jpg_430x430q90.jpg'
     },
     {
-      uri:'https://img.alicdn.com/bao/uploaded/i2/TB13paDSXXXXXb7XpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg'
+	uri:'https://img.alicdn.com/bao/uploaded/i2/TB13paDSXXXXXb7XpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg'
     },
 ];
 
 class IndexPage extends Component {
     constructor(props){
-        super(props);
-        this.state = {
-            imagesData:imagesData,
-            goodsItemData:goodsItemData,
-            goodsData:goodsData,
-            brand:brand,
-      };
+	super(props);
+	this.state = {
+	    imagesData:imagesData,
+	    goodsItemData:goodsItemData,
+	    goodsData:goodsData,
+	    brand:brand
+	};
     }
     static navigationOptions = ({ navigation }) => ({
-        tabBarLabel:'首页',
-        tabBarIcon: ({ tintColor }) => (
-            <Icon name='ios-home' size={20} color={tintColor}/>
-        ),
-        headerTitle:'U兔购',
-        headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
-        headerStyle:{height:50,paddingTop:20},
-        headerLeft:
-                    <TouchableOpacity style={{marginLeft:15}} onPress={()=>navigation.navigate('Search')}>
-                        <Icon name='ios-search' size={20}/>
-                    </TouchableOpacity>,
-        headerRight:
-                    <TouchableOpacity style={{marginRight:15}}>
-                        <Icon name='ios-qr-scanner-outline' size={20}/>
-                    </TouchableOpacity>,
+	tabBarLabel:'首页',
+	tabBarIcon: ({ tintColor }) => (
+		<Icon name='ios-home' size={20} color={tintColor}/>
+	),
+	headerTitle:'U兔购',
+	headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
+	headerStyle:{height:50,paddingTop:20},
+	headerLeft:
+	    <TouchableOpacity style={{marginLeft:15}} onPress={()=>navigation.navigate('Search')}>
+	    <Icon name='ios-search' size={20}/>
+	    </TouchableOpacity>,
+	headerRight:
+	    <TouchableOpacity style={{marginRight:15}}>
+	    <Icon name='ios-qr-scanner-outline' size={20}/>
+	    </TouchableOpacity>
     });
     render(){
-         const { navigate } = this.props.navigation;
-        return(
-            <View style={{flex:1,}}>
-                <ScrollView>
-                        <Index
-                                imagesData={this.state.imagesData}
-                                goodsItemData={this.state.goodsItemData}
-                                brand={this.state.brand}
-                                goodsData={this.state.goodsData}
-                                // toGoodsDetail={(data)=>{navigate('GoodsDetail',{callback:(data)=>{console.log(data)}});console.log(data)}}
-                                navigation={this.props.navigation}
-                        />
-                </ScrollView>
-           </View>
-        )
+	const { navigate } = this.props.navigation;
+	return(
+		<View style={{flex:1}}>
+		<ScrollView>
+		<Index
+	    imagesData={this.state.imagesData}
+	    goodsItemData={this.state.goodsItemData}
+	    brand={this.state.brand}
+	    goodsData={this.state.goodsData}
+	    // toGoodsDetail={(data)=>{navigate('GoodsDetail',{callback:(data)=>{console.log(data)}});console.log(data)}}
+	    navigation={this.props.navigation}
+		/>
+		</ScrollView>
+		</View>
+	);
     }
 }
 
 class ClassifyPage extends Component {
     static navigationOptions = ({ navigation }) => ({
-        tabBarLabel:'分类',
-        tabBarIcon: ({ tintColor }) => (
-            <Icon name='ios-keypad' size={20} color={tintColor}/>
-        ),
-        headerTitle:'U兔购',
-        headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
-        headerStyle:{height:50,paddingTop:20},
-        headerLeft:
-                    <TouchableOpacity style={{marginLeft:15}} onPress={() => navigation.navigate('Search')}>
-                        <Icon name='ios-search' size={20}/>
-                    </TouchableOpacity>,
-        headerRight: <TouchableOpacity style={{marginRight:15}}>
-                        <Icon name='ios-qr-scanner-outline' size={20}/>
-                    </TouchableOpacity>,
+	tabBarLabel:'分类',
+	tabBarIcon: ({ tintColor }) => (
+		<Icon name='ios-keypad' size={20} color={tintColor}/>
+	),
+	headerTitle:'U兔购',
+	headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
+	headerStyle:{height:50,paddingTop:20},
+	headerLeft:
+	    <TouchableOpacity style={{marginLeft:15}} onPress={() => navigation.navigate('Search')}>
+	    <Icon name='ios-search' size={20}/>
+	    </TouchableOpacity>,
+	headerRight: <TouchableOpacity style={{marginRight:15}}>
+	    <Icon name='ios-qr-scanner-outline' size={20}/>
+	    </TouchableOpacity>,
     });
     render(){
-        return(
-            <View style={{flex:1,backgroundColor:'#fff',}}>
-                <Classify/>
-           </View>
-        )
+	return(
+		<View style={{flex:1,backgroundColor:'#fff',}}>
+		<Classify navigation={this.props.navigation}/>
+		</View>
+	)
     }
 }
 
 class CartPage extends Component {
-    static navigationOptions = {
-        tabBarLabel:'购物车',
-        tabBarIcon: ({ tintColor }) => (
-            <Icon name='ios-cart' size={20} color={tintColor}/>
-        ),
-        headerTitle:'购物车',
-        headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
-        headerStyle:{height:50,paddingTop:20},
-        headerLeft: null,
-        headerRight: <TouchableOpacity style={{marginRight:15}}>
-                        <Text style={StyleObject.fontSize}>完成</Text>
-                    </TouchableOpacity>,
+    constructor(props){
+	super(props);
+	this.switchView = this.switchView.bind(this);
+	this.state={
+	    isEdit:false,
+	}
+    }
+    static navigationOptions = ({navigation})=>{
+	const {state,setParams,goBack} = navigation;
+	if(state.params){
+	    var isEdit = state.params.mode == 'isEdit';
+
+	if(state.params.arrowShow){
+	    return{
+		tabBarLabel:'购物车',
+		tabBarIcon: ({ tintColor }) => (
+			<Icon name='ios-cart' size={20} color={tintColor}/>
+		),
+		headerTitle:'购物车',
+		headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
+		headerStyle:{height:50,paddingTop:20},
+		headerLeft:(
+			<TouchableOpacity onPress={()=>goBack()}>
+          		<Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+			</TouchableOpacity>
+	        ),
+		headerRight:(   <TouchableOpacity style={{marginRight:15}} onPress = {()=>{state.params.switch();setParams({mode:isEdit ? 'none' : 'isEdit'});}}>
+				<Text style={StyleObject.fontSize}>{isEdit ? '编辑' : '完成'}</Text>
+				</TouchableOpacity>),
+	    }
+
+	}else{
+	    return{
+		tabBarLabel:'购物车',
+		tabBarIcon: ({ tintColor }) => (
+			<Icon name='ios-cart' size={20} color={tintColor}/>
+		),
+		headerTitle:'购物车',
+		headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14},
+		headerStyle:{height:50,paddingTop:20},
+		headerLeft:(
+			<View style={{width:20}}></View>
+	        ),
+		headerRight:(   <TouchableOpacity style={{marginRight:15}} onPress = {()=>{state.params.switch();setParams({mode:isEdit ? 'none' : 'isEdit'});}}>
+				<Text style={StyleObject.fontSize}>{isEdit ? '编辑' : '完成'}</Text>
+				</TouchableOpacity>),
+	    }
+
+	}}
     };
+    componentDidMount(){
+	this.props.navigation.setParams({
+            switch:()=>this.switchView(),
+	    mode:'isEdit',
+	});
+	//this.props.navigation.state.params.isEdit = false; 
+    }
+    switchView(){
+	this.setState({
+	    isEdit : !this.state.isEdit,
+	})
+    }
     render(){
         return(
-          <View style={{flex:1,}}>
-                <Cart/>
-           </View>
+		<View style={{flex:1,}}>
+		<Cart isEdit={this.state.isEdit} navigation={this.props.navigation}/>
+		</View>
         )
     }
 }
@@ -248,15 +305,15 @@ class PersonPage extends Component {
     static navigationOptions = {
         tabBarLabel:'我的',
         tabBarIcon: ({ tintColor }) => (
-            <Icon name='md-person' size={20} color={tintColor}/>
+		<Icon name='md-person' size={20} color={tintColor}/>
         ),
         header:null,
     };
     render(){
         return(
-          <View>
+		<View>
                 <Person  navigation={this.props.navigation}/>
-           </View>
+		</View>
         )
     }
 }
@@ -276,8 +333,8 @@ const UserCenterNavigator = TabNavigator({
     },
 },{
     tabBarPosition:'bottom',
-    swipeEnabled:true,
-    initialRoutename:'IndexPage',
+    swipeEnabled:false,
+    initialRouteName:'IndexPage',
     tabBarOptions:{
         activeTintColor:'#FC0844',
         inactiveTintColor:'#1d1d1d',
@@ -329,6 +386,9 @@ const UserCenter = StackNavigator({
     UserMoney:{
         screen: UserMoney,
     },
+    HotSale:{
+	screen: HotSale,
+    },
     UserAccount:{
         screen: UserAccount,
     },
@@ -375,16 +435,32 @@ const UserCenter = StackNavigator({
             headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,color:'#F4013C'},
             headerStyle:{height:50,paddingTop:20,},
             headerLeft: (
-                        <TouchableOpacity onPress={()=>navigation.goBack()}>
-                            <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
-                        </TouchableOpacity>
-                    ), 
-             headerRight:(
-                <View style={{width:20}}>
+                    <TouchableOpacity onPress={()=>navigation.goBack()}>
+                    <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
+                    </TouchableOpacity>
+            ), 
+            headerRight:(
+                    <View style={{width:20}}>
 
                 </View>
             ),
         })
+    },
+    //待收货
+    WaitReceiveGoods:{
+	screen: WaitReceiveGoods,
+    },
+    WaitSendGoods:{
+	screen: WaitSendGoods,
+    },
+    WaitPay:{
+	screen: WaitPay,
+    },
+    Ready:{
+	screen: Ready,
+    },
+    AllOrder:{
+	screen: AllOrder,
     },
     ConfirmOrder:{
         screen: ConfirmOrder,
@@ -398,39 +474,41 @@ const UserCenter = StackNavigator({
     Evaluate:{
         screen: Evaluate,
     },
-    Search: { screen: Search },
-    GoodsDetail: { screen: GoodsDetailNav },
+    Search : { screen: Search },
+    ShopCollect : { screen: ShopCollect},
+    GoodsDetail : { screen: GoodsDetailNav },
+    CustomerServer : { screen: CustomerServer },
 });
 
 /*const StackOptions = ({navigation}) => {
-    console.log(navigation);
-    let {state,goBack} = navigation;
+  console.log(navigation);
+  let {state,goBack} = navigation;
 
-    // 用来判断是否隐藏或显示header
-    const visible= state.params.isVisible;
-    let header;
-    if (visible === true){
-        header = null;
-    }
-    const headerStyle = {backgroundColor:'#4ECBFC'};
-    const headerTitle = state.params.title;
-    const headerTitleStyle = {fontSize:FONT_SIZE(20),color:'white',fontWeight:'500'}
-    const headerBackTitle = false;
-    const headerLeft = (
-        <Button
-            isCustom={true}
-            customView={
-                            <Icon
-                                name='ios-arrow-back'
-                                size={30}
-                                color='white'
-                                style={{marginLeft:13}}
-                            />
-                        }
-            onPress={()=>{goBack()}}
-        />
-    );
-    return {headerStyle,headerTitle,headerTitleStyle,headerBackTitle,headerLeft,header}
-};*/
+  // 用来判断是否隐藏或显示header
+  const visible= state.params.isVisible;
+  let header;
+  if (visible === true){
+  header = null;
+  }
+  const headerStyle = {backgroundColor:'#4ECBFC'};
+  const headerTitle = state.params.title;
+  const headerTitleStyle = {fontSize:FONT_SIZE(20),color:'white',fontWeight:'500'}
+  const headerBackTitle = false;
+  const headerLeft = (
+  <Button
+  isCustom={true}
+  customView={
+  <Icon
+  name='ios-arrow-back'
+  size={30}
+  color='white'
+  style={{marginLeft:13}}
+  />
+  }
+  onPress={()=>{goBack()}}
+  />
+  );
+  return {headerStyle,headerTitle,headerTitleStyle,headerBackTitle,headerLeft,header}
+  };*/
 
 export default UserCenter;

@@ -40,6 +40,7 @@ export default class EditAddr extends Component {
         }
         this.handleSelect = this.handleSelect.bind(this);
         this.setModalVisible = this.setModalVisible.bind(this);
+	this.confirmDeleteAddr = this.confirmDeleteAddr.bind(this);
     }
     handleSelect(prov,city,area){
         this.setState({
@@ -48,8 +49,18 @@ export default class EditAddr extends Component {
 		});
 	}
     static navigationOptions = ({navigation}) => {
-          const {state,setParams,goBack} = navigation;
-          const { data } = state.params;
+        const {state,setParams,goBack,navigate} = navigation;
+        const { data } = state.params;
+	// const newAddr = {
+	//     addrId : this.state.addrId,
+	//     receiveName : this.state.receiveName,
+	//     receivePhone : this.state.receivePhone,
+	//     receiveAddr : this.state.receiveAddr,
+	//     receiveStreet : this.state.receiveStreet,
+	//     isDefault : this.state.isDefault,
+	// }
+	//编辑成功后，点击保存，把state传给服务器，
+	//删除地址后，把addrID,传给服务器，
            return{
                 headerTitle: '编辑地址',
                 headerTitleStyle:{alignSelf:'center',justifyContent:'center',fontSize:14,color:'#F4013C'},
@@ -64,7 +75,11 @@ export default class EditAddr extends Component {
                                                                         '保存成功',
                                                                         ToastAndroid.SHORT,
                                                                         ToastAndroid.CENTER
-                                                                    )}}>
+                                                                    );navigate('ReceiveAddr',{type:'edit',
+
+											     }
+									      )
+		                                                   }}>
                                     <Text style={StyleObject.fontSize}>保存</Text>
                             </TouchableOpacity>
            };
@@ -90,6 +105,10 @@ export default class EditAddr extends Component {
                 deleteModal : visible,
             });
         }
+    }
+    confirmDeleteAddr(){
+	this.setModalVisible(false);
+	this.props.navigation.navigate('ReceiveAddr',{type:'delete',data:null});
     }
     render(){
         const {params} = this.props.navigation.state;
@@ -200,7 +219,7 @@ export default class EditAddr extends Component {
                                 <TouchableOpacity style={[StyleObject.flex,StyleObject.center]} onPress={()=>this.setModalVisible(false)}>
                                     <Text style={[StyleObject.fontSize,StyleObject.active]}>取消</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={[StyleObject.flex,StyleObject.center]} onPress={()=>this.props.navigation.goBack()}>
+                <TouchableOpacity style={[StyleObject.flex,StyleObject.center]} onPress={()=>this.confirmDeleteAddr()}>
                                     <Text style={[StyleObject.fontSize,StyleObject.active]}>确认</Text>
                                 </TouchableOpacity>
                             </View>

@@ -99,6 +99,81 @@ const classifyData = [
         },
     ]
 ];
+const classData = [
+    {
+        mainImg:'https://aecpm.alicdn.com/simba/img/TB1CWf9KpXXXXbuXpXXSutbFXXX.jpg_q50.jpg'
+    },
+    [
+        {
+            img:'https://img.alicdn.com/tps/TB1TEOXIpXXXXXAXXXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'hah'
+        },
+        {
+            img:'https://img.alicdn.com/tps/TB1bopNIpXXXXXUXVXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'衬衫'
+        },
+        {
+            img:'https://img.alicdn.com/tps/TB1ZIxUIpXXXXbgXFXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'娃娃装'
+        },
+        {
+            img:'https://img.alicdn.com/tps/TB1Z48_IpXXXXa4XXXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'卫衣'
+        },
+        {
+            img:'https://img.alicdn.com/tps/i4/TB1AXECGVXXXXcCXFXXMxXJVFXX-100-100.jpg_125x125Q50s50.jpg_.webp',
+            detail:'针织衫'
+        },
+        {
+            img:'https://img.alicdn.com/tps/i1/TB1hOdGHpXXXXXMaXXXMxXJVFXX-100-100.jpg_125x125Q50s50.jpg_.webp',
+            detail:'风衣'
+        },
+        {
+            img:'https://img.alicdn.com/tps/TB1pdFMIpXXXXbrXVXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'连衣裙'
+        },
+        {
+            img:'https://img.alicdn.com/tps/TB12kxUIpXXXXa7XFXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'连衣裙'
+        },
+        {
+            img:'https://img.alicdn.com/tps/TB1XcJKIpXXXXcsXVXXXXXXXXXX.jpg_125x125Q50s50.jpg_.webp',
+            detail:'连衣裙'
+        },
+    ]
+];
+const goodsData = [
+  {
+    img:'https://img.alicdn.com/bao/uploaded/i3/TB1gzs5RXXXXXalXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+    detailText:'皮肤补水站-温和修护，璀璨焕白',
+    price:'¥ 320',
+    num:50,
+  },
+  {
+    img:'https://img.alicdn.com/bao/uploaded/i3/TB1un0JQFXXXXcUXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+    detailText:'皮肤补水站-温和修护，璀璨焕白',
+    price:'¥ 320',
+    num:50,
+  },
+  {
+    img:'https://img.alicdn.com/bao/uploaded/i2/TB1zDSDRFXXXXXqXFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+    detailText:'皮肤补水站-温和修护，璀璨焕白',
+    price:'¥ 320',
+    num:50,
+  },
+  {
+    img:'https://img.alicdn.com/bao/uploaded/i8/TB1vLcbQXXXXXakXpXXYXGcGpXX_M2.SS2_430x430q90.jpg',
+    detailText:'皮肤补水站-温和修护，璀璨焕白',
+    price:'¥ 320',
+    num:50,
+  },
+  {
+    img:'https://img.alicdn.com/bao/uploaded/i3/TB1HavXSXXXXXXzXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg',
+    detailText:'皮肤补水站-温和修护，璀璨焕白',
+    price:'¥ 320',
+    num:50,
+  },
+];
 
 export default class Classify extends Component {
     constructor(props){
@@ -106,7 +181,8 @@ export default class Classify extends Component {
         this.state={
             item:classifyItemData,
             isActive:false,
-            classifyData:classifyData,
+            classifyData:null,
+	    goodsData:null,
         }
         this.isActiveItem = this.isActiveItem.bind(this);
         this.isActiveItemText = this.isActiveItemText.bind(this);
@@ -136,9 +212,39 @@ export default class Classify extends Component {
             }
             return val;
         });
+	//判断是否是点击在特选区的item上，如果是设置goodsData,否则设置为null
+        let newGoods = null,newClassifyData = null;
+	let isItem = newArray.filter((n)=>{
+	    return n.isActive == true
+	})
+	
+	switch(isItem[0].item){
+	    case '特选区':
+               newGoods = goodsData;
+	       newClassifyData = null;
+	    break;
+	    case '女装':
+	       newGoods = null;
+               newClassifyData = classifyData;
+	    break;
+        default:
+	    newGoods = null;
+	    newClassifyData = classData;
+	}
+	//	console.log(newClassifyData);
+	//设置state更新页面
         this.setState({
-            item:newArray
-        })
+            item:newArray,
+	    classifyData:newClassifyData,
+	    goods:newGoods,
+        });
+	console.log(newGoods,123465);
+    }
+    //页面初始化加载特选区商品
+    componentDidMount(){
+	this.setState({
+	    goodsData:goodsData
+	})
     }
     render(){
       return(
@@ -149,7 +255,10 @@ export default class Classify extends Component {
                                 isActiveItemText={ this.isActiveItemText }
                                 toggle={this.toggle}/>
                 <View style={[StyleObject.flex]}>
-                        <ClassifyDetail classifyData={this.state.classifyData}/>
+              <ClassifyDetail classifyData={this.state.classifyData}
+          goodsData={this.state.goodsData}
+	  navigation={this.props.navigation}
+	      />
                 </View>
             </View>
         </ScrollView>
@@ -191,9 +300,10 @@ class ClassifyItem extends Component {
 class ClassifyDetail extends Component{
     constructor(props){
         super(props);
-        const { classifyData } = props
+        const { classifyData,goodsData } = props
         this.state={
-            classifyData:props.classifyData
+            classifyData:classifyData,
+	    goodsData:goodsData,
         }
         this.RenderItem = this.RenderItem.bind(this);
     }
@@ -207,19 +317,36 @@ class ClassifyDetail extends Component{
             </View>
         )
     }
+    componentWillReceiveProps(nextProps,nextState){
+	console.log(nextProps,nextState);
+	this.setState({
+	    classifyData:nextProps.classifyData,
+	    goodsData:nextProps.goodsData,
+	})
+    }
     render(){
         return(
             <View style={StyleObject.flex}>
-                <View style={styles.classifyHeadImg}>
-                    <Image source={{uri:this.state.classifyData[0].mainImg}}
-                        style={{width:Dimensions.get('window').width-110,height:100}}
-                    />
-                </View>
-                <View style={styles.classifyData}>
-                    {
-                        this.state.classifyData[1].map((val,idx)=>this.RenderItem(val,idx))
-                    }
-                </View>
+		{
+		   this.state.classifyData != null &&  this.state.classifyData[0].mainImg ?
+		        <View>
+			 <View style={styles.classifyHeadImg}>
+                             <Image source={{uri:this.state.classifyData[0].mainImg}}
+                                    style={{width:Dimensions.get('window').width-110,height:100}}
+                             />
+                         </View>
+                         <View style={styles.classifyData}>
+                           {
+                                this.state.classifyData[1].map((val,idx)=>this.RenderItem(val,idx))
+                           }
+                         </View>
+			</View> : this.state.goodsData ?
+			<Goods
+		    type='classifyGoods'
+		    goodsData={this.state.goodsData}
+		    navigation={this.props.navigation}
+			/> : null
+		}
             </View>
         )
     }

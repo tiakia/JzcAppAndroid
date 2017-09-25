@@ -47,36 +47,46 @@ export default class ModalContent extends Component {
     }
     render() {
         return (
-            <View >
+		<View >
                 <Modal
-                    animationType={'slide'}
-                    transparent={true}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => { this.setState({ modalVisible: false}); }}
+            animationType={'slide'}
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => { this.setState({ modalVisible: false}); }}
                 >
-                    <StatusBar
-                        translucent={true}
-                        backgroundColor='rgba(0,0,0,0.3)'
-                        barStyle='dark-content'
-                    />
-                    <View style={styles.modal}>
-                        <ModalDetail
-                                    modalType={this.state.modalType}
-                                    closeModal={this.setModalVisible}
-                                    goodsText={this.state.goodsText}
-                                    memberDetail={this.state.memberDetail}
-                                    navigation = {this.props.navigation}
-                                    close={this.close}
-                                    handleSelect={this.props.handleSelect}
+                <StatusBar
+            translucent={true}
+            backgroundColor='rgba(0,0,0,0.3)'
+            barStyle='dark-content'
+                />
+                <View style={styles.modal}>
+                <ModalDetail
+            modalType={this.state.modalType}
+            closeModal={this.setModalVisible}
+            goodsText={this.state.goodsText}
+            memberDetail={this.state.memberDetail}
+            navigation = {this.props.navigation}
+            close={this.close}
+            handleSelect={this.props.handleSelect}
 
-                                    prov={this.state.prov}
-                                    city={this.state.city}
-                                    area={this.state.area}
-                                    selectProvince={this.state.selectProvince}
-                                    selectCity={this.state.selectCity}
-                                    selectArea={this.state.selectArea}
-                        />
-                    </View>
+            prov={this.state.prov}
+            city={this.state.city}
+            area={this.state.area}
+            selectProvince={this.state.selectProvince}
+            selectCity={this.state.selectCity}
+            selectArea={this.state.selectArea}
+
+	    titleColor={this.props.titleColor}
+	    content={this.props.content}
+	    leftTitle={this.props.leftTitle}
+	    rightTitle={this.props.rightTitle}
+	    leftColor={this.props.leftColor}
+	    rightColor={this.props.rightColor}
+	    title={this.props.title}
+	    handleLeft={this.props.handleLeft}
+	    handleRight={this.props.handleRight}
+                />
+                </View>
                 </Modal>
 
             </View>
@@ -98,7 +108,7 @@ class ModalDetail extends Component {
             selectCity:props.selectCity,
             selectArea:props.selectArea,
         };
-     this.renderPickerItem = this.renderPickerItem.bind(this);
+	this.renderPickerItem = this.renderPickerItem.bind(this);
         this.getProvince = this.getProvince.bind(this);
         this.getProvinceCity = this.getProvinceCity.bind(this);
         this.getProvinceCityArea = this.getProvinceCityArea.bind(this);
@@ -119,9 +129,9 @@ class ModalDetail extends Component {
     }
     
     renderPickerItem(val,idx){
-            return (
+        return (
                 <Picker.Item label={val} value={val} key={val} />
-            );
+        );
     }
 
     getProvince(){
@@ -151,12 +161,12 @@ class ModalDetail extends Component {
             let curProvince = val.name;
             if( curProvince == province ) {
                 cityArea.map((cityVal,cityIdx )=> {
-                   let curCity = cityVal.name;
-                   if(curCity == city ) {
+                    let curCity = cityVal.name;
+                    if(curCity == city ) {
                         cityVal.area.map((areaVal,areaIdx)=>{
                             result.push(areaVal);
                         });
-                   }
+                    }
                 });
             }
         });
@@ -197,136 +207,164 @@ class ModalDetail extends Component {
         let memberDetail = this.state.memberDetail;
         if(this.state.type == 'memberPri'){
             return (
-                <View style={styles.modalContainer}>
-                <View>
+                    <View style={styles.modalContainer}>
+                    <View>
                     <View style={[StyleObject.center, styles.modalTitle]}>
-                        <Text style={StyleObject.fontSize}>会员专享价</Text>
+                    <Text style={StyleObject.fontSize}>会员专享价</Text>
                     </View>
                     <View style={styles.modalMemberContainer}>
-                        <MemberDetail memberDetail={this.state.memberDetail} />
+                    <MemberDetail memberDetail={this.state.memberDetail} />
                     </View>
-                </View>
-                <TouchableHighlight underlayColor='transparent'
-                    style={StyleObject.pageBottomBtn}
-                    onPress={this.props.closeModal}
-                >
+                    </View>
+                    <TouchableHighlight underlayColor='transparent'
+                style={StyleObject.pageBottomBtn}
+                onPress={this.props.closeModal}
+                    >
                     <Text style={[StyleObject.textColor,StyleObject.fontSize]}>立即购买</Text>
-                </TouchableHighlight>
-            </View>
+                    </TouchableHighlight>
+		    </View>
             )
         }else if(this.state.type == 'areaSelect'){
             return (
-                <View style={styles.modalContainerArea}>
+                    <View style={styles.modalContainerArea}>
                     <View style={StyleObject.flex}>
-                        <View style={styles.areaConfirm}>
-                            <TouchableHighlight
-                                    onPress={this.areaSelectResult}
-                                    style={{padding:10}}
-                                    underlayColor='transparent'
+                    <View style={styles.areaConfirm}>
+                    <TouchableHighlight
+                onPress={this.areaSelectResult}
+                style={{padding:10}}
+                underlayColor='transparent'
 
-                                >
-                                    <Text style={[StyleObject.fontSize,StyleObject.activeTextColor]}>确认</Text>
-                                </TouchableHighlight>
-                        </View>
-                        <View style={styles.areaPickerDetail}>
-                            <Picker
-                                style={{ flex:1 }}
-                                prompt='请选择省/市'
-                                selectedValue={this.state.selectProvince}
-                                onValueChange={(itemValue, itemIndex) => this.selectProvince(itemValue,itemIndex)}
-                            >
-                                {this.state.prov.map((val,idx)=> this.renderPickerItem(val,idx))}
-                            </Picker>
-                            <Picker
-                                style={{ flex:1 }}
-                                prompt='请选择市/区'
-                                selectedValue={this.state.selectCity}
-                                onValueChange={(itemValue, itemIndex) => this.selectCity(itemValue,itemIndex)}
-                            >
-                                {this.state.city.map((val,idx)=> this.renderPickerItem(val,idx))}
-                            </Picker>
-                            <Picker
-                                style={{ flex:1  }}
-                                prompt='请选择区/县'
-                                selectedValue={this.state.selectArea}
-                                onValueChange={(itemValue, itemIndex) => this.selectArea(itemValue,itemIndex)}
-                            >
-                                {this.state.area.map((val,idx)=> this.renderPickerItem(val,idx))}
-                            </Picker>
-                        </View>
+                    >
+                    <Text style={[StyleObject.fontSize,StyleObject.activeTextColor]}>确认</Text>
+                    </TouchableHighlight>
                     </View>
-                </View>
+                    <View style={styles.areaPickerDetail}>
+                    <Picker
+                style={{ flex:1 }}
+                prompt='请选择省/市'
+                selectedValue={this.state.selectProvince}
+                onValueChange={(itemValue, itemIndex) => this.selectProvince(itemValue,itemIndex)}
+                    >
+                    {this.state.prov.map((val,idx)=> this.renderPickerItem(val,idx))}
+                </Picker>
+                    <Picker
+                style={{ flex:1 }}
+                prompt='请选择市/区'
+                selectedValue={this.state.selectCity}
+                onValueChange={(itemValue, itemIndex) => this.selectCity(itemValue,itemIndex)}
+                    >
+                    {this.state.city.map((val,idx)=> this.renderPickerItem(val,idx))}
+                </Picker>
+                    <Picker
+                style={{ flex:1  }}
+                prompt='请选择区/县'
+                selectedValue={this.state.selectArea}
+                onValueChange={(itemValue, itemIndex) => this.selectArea(itemValue,itemIndex)}
+                    >
+                    {this.state.area.map((val,idx)=> this.renderPickerItem(val,idx))}
+                </Picker>
+                    </View>
+                    </View>
+                    </View>
             )
         }else if(this.state.type == 'realName'){
             return (
-                <View style={styles.modalContainerArea}>
+                    <View style={styles.modalContainerArea}>
                     <AreaPicker 
-                                closeModal={this.props.closeModal}
-                                showArea={this.props.handleSelect}
-                                prov={this.state.prov}
-                                city={this.state.city}
-                                area={this.state.area}
-                                selectProvince={this.state.selectProvince}
-                                selectCity={this.state.selectCity}
-                                selectArea={this.state.selectArea}
-                                type='realName'
+                closeModal={this.props.closeModal}
+                showArea={this.props.handleSelect}
+               prov={this.state.prov}
+                city={this.state.city}
+                area={this.state.area}
+                selectProvince={this.state.selectProvince}
+                selectCity={this.state.selectCity}
+                selectArea={this.state.selectArea}
+                type='realName'
                     />
-                </View>
+                    </View>
             )
         }else if(this.state.type == 'share'){
             return (
-                <View style={styles.modalShareContent}>
+                    <View style={styles.modalShareContent}>
                     <View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:20,marginTop:20}}>
-                        <View style={StyleObject.center}>
-                            <Icon name='qq' size={25} color="#4EAFE7"/>
-                            <Text style={styles.shareIcon}>QQ</Text>
-                        </View>
-                        <View style={StyleObject.center}>
-                            <Icon name='wechat' size={25} color="#EECF43"/>
-                            <Text style={styles.shareIcon}>QQ空间</Text>
-                        </View>
-                        <View style={StyleObject.center}>
-                            <Icon name='weibo' size={25} color="#40AF35"/>
-                            <Text style={styles.shareIcon}>微信好友</Text>
-                        </View>
-                        <View style={StyleObject.center}>
-                            <Icon name='wechat' size={25} color="#43AF34"/>
-                            <Text style={styles.shareIcon}>朋友圈</Text>
-                        </View>
-                        <View style={StyleObject.center}>
-                            <Icon name='weibo' size={25} color="#E04F69"/>
-                            <Text style={styles.shareIcon}>微博</Text>
-                        </View>
+                    <View style={StyleObject.center}>
+                    <Icon name='qq' size={25} color="#4EAFE7"/>
+                    <Text style={styles.shareIcon}>QQ</Text>
+                    </View>
+                    <View style={StyleObject.center}>
+                    <Icon name='wechat' size={25} color="#EECF43"/>
+                    <Text style={styles.shareIcon}>QQ空间</Text>
+                    </View>
+                    <View style={StyleObject.center}>
+                    <Icon name='weibo' size={25} color="#40AF35"/>
+                    <Text style={styles.shareIcon}>微信好友</Text>
+                    </View>
+                    <View style={StyleObject.center}>
+                    <Icon name='wechat' size={25} color="#43AF34"/>
+                    <Text style={styles.shareIcon}>朋友圈</Text>
+                    </View>
+                    <View style={StyleObject.center}>
+                    <Icon name='weibo' size={25} color="#E04F69"/>
+                    <Text style={styles.shareIcon}>微博</Text>
+                    </View>
                     </View>
                     <TouchableOpacity onPress={this.props.closeModal} style={[StyleObject.center]}>
-                        <View style={styles.cancleShare}>
-                            <Text style={StyleObject.fontSize}>取消分享</Text>
-                        </View>
+                    <View style={styles.cancleShare}>
+                    <Text style={StyleObject.fontSize}>取消分享</Text>
+                    </View>
                     </TouchableOpacity>
-                </View>
+                    </View>
             )
         }else if(this.state.type == 'goodsText'){
             return (
-                <View style={styles.modalContainer}>
+                    <View style={styles.modalContainer}>
                     <View>
-                        <View style={[StyleObject.center, styles.modalTitle]}>
-                            <Text style={StyleObject.fontSize}>商品信息</Text>
-                        </View>
-                        <View style={styles.modalMemberContainer}>
-                            <GoodsText goodsText={this.state.goodsText} />
-                        </View>
+                    <View style={[StyleObject.center, styles.modalTitle]}>
+                    <Text style={StyleObject.fontSize}>商品信息</Text>
+                    </View>
+                    <View style={styles.modalMemberContainer}>
+                    <GoodsText goodsText={this.state.goodsText} />
+                    </View>
                     </View>
                     <TouchableHighlight underlayColor='transparent'
-                        style={StyleObject.pageBottomBtn}
-                        onPress={this.props.closeModal}
+                style={StyleObject.pageBottomBtn}
+                onPress={this.props.closeModal}
                     >
-                        <Text style={[StyleObject.textColor,StyleObject.fontSize]}>立即购买</Text>
+                    <Text style={[StyleObject.textColor,StyleObject.fontSize]}>立即购买</Text>
                     </TouchableHighlight>
-                </View>
+                    </View>
             )
+        }else if(this.state.type == 'alertWindow'){
+            return (
+		    <View style={[StyleObject.flex,StyleObject.center]}>
+		    <View style={styles.alertWindowContainer}>
+		    {
+			this.props.title ?
+			    <View style={[styles.alertWindowTitleLayout,StyleObject.center]}>
+			    <Text style={[{
+				color:this.props.titleColor,
+			    },StyleObject.fontSize]}>{this.props.title}</Text>
+			    </View> :
+			null
+		    }
+		    <View style={[styles.alertWindowContent,StyleObject.center]}>
+		    <Text style={[StyleObject.fontSize,StyleObject.normalColor]}>{this.props.content}</Text>
+		    </View>
+		    <View style={[StyleObject.flexDirection,StyleObject.center,styles.alertWindowBottom]}>
+
+		    <TouchableOpacity style={[styles.alertWindowLeftLine,styles.alertWindowPadding,StyleObject.flex,StyleObject.center]} onPress={this.props.handleLeft}>
+		    <Text style={[StyleObject.fontSize,{color:this.props.leftColor || '#1d1d1d'}]}>{this.props.leftTitle}</Text>
+		    </TouchableOpacity>
+		    <TouchableOpacity style={[styles.alertWindowPadding,StyleObject.flex,StyleObject.center]} onPress={this.props.handleRight}>
+		    <Text style={[StyleObject.fontSize,{color:this.props.rightColor || '#1d1d1d'}]}>{this.props.rightTitle}</Text>
+		    </TouchableOpacity >
+		    </View>
+		    </View>
+		    </View>
+	    )
         }else{
-            return null;
-        }
+	    return null;
+	}
     }
 }
 
@@ -361,9 +399,9 @@ class AreaPicker extends Component {
     }
     
     renderPickerItem(val,idx){
-            return (
+        return (
                 <Picker.Item label={val} value={val} key={val} />
-            );
+        );
     }
 
     getProvince(){
@@ -393,12 +431,12 @@ class AreaPicker extends Component {
             let curProvince = val.name;
             if( curProvince == province ) {
                 cityArea.map((cityVal,cityIdx )=> {
-                   let curCity = cityVal.name;
-                   if(curCity == city ) {
+                    let curCity = cityVal.name;
+                    if(curCity == city ) {
                         cityVal.area.map((areaVal,areaIdx)=>{
                             result.push(areaVal);
                         });
-                   }
+                    }
                 });
             }
         });
@@ -433,49 +471,49 @@ class AreaPicker extends Component {
     }
     render() {
         return (
-            <View style={StyleObject.flex}>
+		<View style={StyleObject.flex}>
                 <View style={styles.areaConfirm}>
-                       <TouchableHighlight
-                            onPress={
-                                        ()=>{
-                                            this.props.closeModal;
-                                            this.props.showArea(this.state.selectProvince,this.state.selectCity,this.state.selectArea);
-                                        }
-                                    }
-                            style={{padding:10}}
-                            underlayColor='transparent'
+                <TouchableHighlight
+            onPress={
+                ()=>{
+                    this.props.closeModal;
+                    this.props.showArea(this.state.selectProvince,this.state.selectCity,this.state.selectArea);
+                }
+            }
+            style={{padding:10}}
+            underlayColor='transparent'
 
-                        >
-                            <Text style={[StyleObject.fontSize,StyleObject.activeTextColor]}>确认</Text>
-                        </TouchableHighlight>
+                >
+                <Text style={[StyleObject.fontSize,StyleObject.activeTextColor]}>确认</Text>
+                </TouchableHighlight>
                 </View>
                 <View style={styles.areaPickerDetail}>
-                    <Picker
-                        style={{ flex:1 }}
-                        prompt='请选择省/市'
-                        selectedValue={this.state.selectProvince}
-                        onValueChange={(itemValue, itemIndex) => this.selectProvince(itemValue,itemIndex)}
-                    >
-                        {this.state.prov.map((val,idx)=> this.renderPickerItem(val,idx))}
-                    </Picker>
-                    <Picker
-                        style={{ flex:1 }}
-                        prompt='请选择市/区'
-                        selectedValue={this.state.selectCity}
-                        onValueChange={(itemValue, itemIndex) => this.selectCity(itemValue,itemIndex)}
-                    >
-                        {this.state.city.map((val,idx)=> this.renderPickerItem(val,idx))}
-                    </Picker>
-                    <Picker
-                        style={{ flex:1  }}
-                        prompt='请选择区/县'
-                        selectedValue={this.state.selectArea}
-                        onValueChange={(itemValue, itemIndex) => this.selectArea(itemValue,itemIndex)}
-                    >
-                        {this.state.area.map((val,idx)=> this.renderPickerItem(val,idx))}
-                    </Picker>
+                <Picker
+            style={{ flex:1 }}
+            prompt='请选择省/市'
+            selectedValue={this.state.selectProvince}
+            onValueChange={(itemValue, itemIndex) => this.selectProvince(itemValue,itemIndex)}
+                >
+                {this.state.prov.map((val,idx)=> this.renderPickerItem(val,idx))}
+            </Picker>
+                <Picker
+            style={{ flex:1 }}
+            prompt='请选择市/区'
+            selectedValue={this.state.selectCity}
+            onValueChange={(itemValue, itemIndex) => this.selectCity(itemValue,itemIndex)}
+                >
+                {this.state.city.map((val,idx)=> this.renderPickerItem(val,idx))}
+            </Picker>
+                <Picker
+            style={{ flex:1  }}
+            prompt='请选择区/县'
+            selectedValue={this.state.selectArea}
+            onValueChange={(itemValue, itemIndex) => this.selectArea(itemValue,itemIndex)}
+                >
+                {this.state.area.map((val,idx)=> this.renderPickerItem(val,idx))}
+            </Picker>
                 </View>
-            </View>
+		</View>
         )
     }
 }
@@ -490,19 +528,19 @@ class MemberDetail extends Component {
     }
     renderMember(tab, i) {
         return (
-            <View style={styles.modalMemberLine} key={i}>
+		<View style={styles.modalMemberLine} key={i}>
                 <View style={styles.memberEve}>
-                    <Text style={StyleObject.fontSize}>{tab.level}</Text>
+                <Text style={StyleObject.fontSize}>{tab.level}</Text>
                 </View>
                 <View style={[StyleObject.flex,]}>
-                    <Text style={[styles.goodsDetailMainColor,StyleObject.fontSize]}>{tab.price}</Text>
+                <Text style={[styles.goodsDetailMainColor,StyleObject.fontSize]}>{tab.price}</Text>
                 </View>
-            </View>
+		</View>
         )
     }
     render() {
         return (
-            <View>
+		<View>
                 {
                     this.state.memberDetail.map((tab, i) => this.renderMember(tab, i))
                 }
@@ -518,19 +556,19 @@ class GoodsText extends Component {
     }
     renderGoodsText(tab, i) {
         return (
-            <View style={[styles.modalMemberLine]} key={i}>
+		<View style={[styles.modalMemberLine]} key={i}>
                 <View style={styles.memberEve}>
-                    <Text style={StyleObject.fontSize}>{tab.text}</Text>
+                <Text style={StyleObject.fontSize}>{tab.text}</Text>
                 </View>
                 <View style={[StyleObject.flex, { alignItems: 'flex-start' }]}>
-                    <Text style={[{ color: '#1d1d1d' },StyleObject.fontSize]}>{tab.detail}</Text>
+                <Text style={[{ color: '#1d1d1d' },StyleObject.fontSize]}>{tab.detail}</Text>
                 </View>
-            </View>
+		</View>
         )
     }
     render() {
         return (
-            <View>
+		<View>
                 {
                     this.props.goodsText.map((tab, i) => this.renderGoodsText(tab, i))
                 }
@@ -546,7 +584,7 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         backgroundColor: '#fff',
-        height: 500,
+        height: 400,
         justifyContent: 'space-between'
     },
     modalContainerArea:{
@@ -612,4 +650,15 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
     },
+    alertWindowContainer:{backgroundColor:"#fff",
+				  borderRadius:5,
+				  width:250,
+			 },
+    alertWindowTitleLayout:{
+				paddingTop:10,
+    },
+    alertWindowContent:{paddingTop:15,paddingBottom:15,},
+    alertWindowBottom:{borderTopWidth:1/PixelRatio.get(),borderColor:'#ddd'},
+    alertWindowLeftLine:{borderRightWidth:1/PixelRatio.get(),borderColor:"#ddd",},
+    alertWindowPadding:{paddingTop:10,paddingBottom:10},
 });

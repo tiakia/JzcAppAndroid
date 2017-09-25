@@ -40,7 +40,7 @@ export default class UserInfo extends Component {
                         <Icon name='ios-arrow-back' size={25} color='#1d1d1d' style={{marginLeft:10}}/>
                     </TouchableOpacity>
                      ),
-          headerRight:null,
+          headerRight:<View style={{width:20}}></View>,
       })
       closeModal(){
           this.setState({
