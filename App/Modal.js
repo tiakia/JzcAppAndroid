@@ -127,7 +127,7 @@ class ModalDetail extends Component {
             area: area,
         });
     }
-    
+
     renderPickerItem(val,idx){
         return (
                 <Picker.Item label={val} value={val} key={val} />

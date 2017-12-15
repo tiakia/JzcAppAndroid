@@ -529,7 +529,8 @@ export default class Person extends Component {
             <TouchableOpacity style={StyleObject.card} onPress={()=>{navigate('Order',{isHeaderSHow: true});}}
                 >
                     <Tab
-                        barType = 'tabBar'
+          barType = 'tabBar'
+          
                         icon = 'ios-people'
                         iconColor = '#64AEED'
                         title = '我的订单'

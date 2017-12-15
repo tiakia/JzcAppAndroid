@@ -502,7 +502,7 @@ export default class Cart extends Component{
 		<View style={{flex:1}}>
 		<GoodOrder isEdit={this.props.isEdit} navigation={this.props.navigation}/>
 		</View>
-        )
+        );
     }
 }
 
